@@ -1,4 +1,10 @@
+**/[Bb]in/
+**/[Bb]uild/
 *.class
+*.classpath
+*.project
+
+.settings
 
 # Package Files #
 *.jar
