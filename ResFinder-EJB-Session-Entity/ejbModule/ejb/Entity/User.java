@@ -21,7 +21,13 @@ public class User extends Person {
 	private static final long serialVersionUID = 1L;
 	@Id
 	String id;
-	
+	String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	int rank;
 	Date lastLoginTime;
 	Date lastLogoutTime;

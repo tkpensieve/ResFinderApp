@@ -2,31 +2,21 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import javax.naming.Context;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ejb.EJB;
+import javax.enterprise.inject.New;
+import javax.inject.*;
 
-import ejb.Entity.User;
-import ejb.Service.HelloService;
+import ejb.Entity.*;
 import ejb.Service.UserService;
 
-/**
- * <p>
- * A simple servlet taking advantage of features added in 3.0.
- * </p>
- * 
- * <p>
- * The servlet is registered and mapped to /HelloServlet using the {@linkplain WebServlet
- * @HttpServlet}. The {@link HelloService} is injected by CDI.
- * </p>
- * 
- * @author Pete Muir
- * 
- */
 @SuppressWarnings("serial")
 @WebServlet("/HelloWorldEJB")
 public class HelloWorldServlet extends HttpServlet {
@@ -35,10 +25,10 @@ public class HelloWorldServlet extends HttpServlet {
 
    static String PAGE_FOOTER = "</body></html>";
 
-   @EJB 
-   private HelloService helloService;
-   @EJB
-   private UserService userService;
+  
+   @Inject
+   public UserService userService;
+  
    
    @Override
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -54,14 +44,29 @@ public class HelloWorldServlet extends HttpServlet {
 	   */
 	
 	   PrintWriter writer = resp.getWriter();
+	   
        writer.println(PAGE_HEADER);
-//       User user = new User();
-//       user.setId("tk");
-//       user.setName("tk");
-//       user.setEmailId("tk");
-//       user.setPassword("tk");
-	       writer.println("<h1>" + helloService.createHelloMessage("Rajiv") + "</h1>");
-//       writer.println("<h1>" + userService.createUser(user) + "</h1>");
+      
+       User user = new User();
+       user.setId("tk");
+       user.setName("tk");
+       
+       user.setEmailId("tk");
+       user.setPassword("tk");
+	      // writer.println("<h1>" + helloService.createHelloMessage("Rajiv") + "</h1>");
+       try
+       {
+    	
+      writer.println("<h1>" + userService.createUser(user) + "</h1>");
+       }
+       catch(Exception e)
+       {
+
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			writer.println(errors.toString());
+       }
+       writer.println("grsfgrsfrs");
        writer.println(PAGE_FOOTER);
        writer.close();
    }
