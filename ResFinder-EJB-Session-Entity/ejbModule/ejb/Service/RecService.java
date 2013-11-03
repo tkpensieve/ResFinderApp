@@ -5,30 +5,28 @@ import java.io.StringWriter;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
-import ejb.Entity.Manager;
+
+import ejb.Entity.Recommendation;
 
 /**
- * Session Bean implementation class ManagerService
+ * Session Bean implementation class RecommendationService
  */
 @Stateless
 @LocalBean
-public class ManagerService {
+public class RecService {
 	 @PersistenceContext(unitName="resFinder-ejb-entities")
 		EntityManager em;
 
     /**
      * Default constructor. 
      */
-    public ManagerService() {
-        
-    }
-    public String createManager(Manager res) {
+   
+    public String createRecommendation(Recommendation res) {
 		try{
 		em.persist(res);
-		String beanID = res.getId();
+		int beanID = res.getId();
 		return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
@@ -41,17 +39,17 @@ public class ManagerService {
 		
 			
 	}
-	public Manager findById(int id)
+	public Recommendation findById(int id)
 	{
-		Manager u=em.find(Manager.class,id);
+		Recommendation u=em.find(Recommendation.class,id);
 		return u;
 	}
 	public void delete(int id)
 	{
-		Manager u=em.find(Manager.class,id);
+		Recommendation u=em.find(Recommendation.class,id);
 		em.remove(u);
 	}
-	public void update(Manager u)
+	public void update(Recommendation u)
 	{
 		
 		em.getTransaction().begin();

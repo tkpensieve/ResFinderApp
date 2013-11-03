@@ -5,30 +5,28 @@ import java.io.StringWriter;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
-import ejb.Entity.Manager;
+
+import ejb.Entity.AddRestaurantRequest;
 
 /**
- * Session Bean implementation class ManagerService
+ * Session Bean implementation class AddRestaurantRequestService
  */
 @Stateless
 @LocalBean
-public class ManagerService {
+public class RequestService {
 	 @PersistenceContext(unitName="resFinder-ejb-entities")
 		EntityManager em;
 
     /**
      * Default constructor. 
      */
-    public ManagerService() {
-        
-    }
-    public String createManager(Manager res) {
+   
+    public String createAddRestaurantRequest(AddRestaurantRequest res) {
 		try{
 		em.persist(res);
-		String beanID = res.getId();
+		int beanID = res.getId();
 		return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
@@ -41,17 +39,17 @@ public class ManagerService {
 		
 			
 	}
-	public Manager findById(int id)
+	public AddRestaurantRequest findById(int id)
 	{
-		Manager u=em.find(Manager.class,id);
+		AddRestaurantRequest u=em.find(AddRestaurantRequest.class,id);
 		return u;
 	}
 	public void delete(int id)
 	{
-		Manager u=em.find(Manager.class,id);
+		AddRestaurantRequest u=em.find(AddRestaurantRequest.class,id);
 		em.remove(u);
 	}
-	public void update(Manager u)
+	public void update(AddRestaurantRequest u)
 	{
 		
 		em.getTransaction().begin();
