@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -19,29 +18,7 @@ public class User extends Person {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	String id;
-	String name;
-	String password;
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getEmailId() {
-		return emailId;
-	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-	String emailId;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	int rank;
 	Date lastLoginTime;
 	Date lastLogoutTime;
@@ -62,12 +39,7 @@ public class User extends Person {
 	@OneToMany(cascade=CascadeType.ALL)
 	List<Recommendation> recommendations;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public int getRank() {
 		return rank;
 	}

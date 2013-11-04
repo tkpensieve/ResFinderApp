@@ -3,6 +3,13 @@
 	<persistence-unit name="resFinder-ejb-entities">
 	   <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 	   <class>ejb.Entity.Cuisine</class>
+	   <class>ejb.Entity.AddRestaurantRequest</class>
+	   <class>ejb.Entity.Location</class>
+	   <class>ejb.Entity.Manager</class>
+	   <class>ejb.Entity.Recommendation</class>
+	   <class>ejb.Entity.Restaurant</class>
+	   <class>ejb.Entity.Review</class>
+	   <class>ejb.Entity.User</class>
 	   <properties>
             <property name="hibernate.hbm2ddl.auto" value="none"/>
        </properties>
