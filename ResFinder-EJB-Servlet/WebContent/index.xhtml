@@ -9,12 +9,24 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:panelGrid columns="2">
-                <h:selectOneMenu value="#{SearchForm.selectedLocation}">
-					<f:selectItems value="#{SearchForm.allLocations}" />
-   				</h:selectOneMenu> 
-            </h:panelGrid>
-            <h:commandButton value="Search" action="#{SearchForm.filter}"></h:commandButton>
+            <h:selectOneMenu id="filterLocation" value="#{SearchForm.selectedLocation}">
+				<f:selectItems value="#{SearchForm.allLocations}" />
+  			</h:selectOneMenu> 
+            <h:commandButton value="Search">
+            	<f:ajax listener="#{SearchForm.filter()}" execute="filterLocation" render="resultDiv" />
+            </h:commandButton>
+            <span id="resultDiv" >
+			<br/>
+			<br/>        
+	      
+	        <h:dataTable id="searchResults" value="#{SearchForm.filteredRestaurants}" var="result">
+	        	<f:facet name="header">Team Name</f:facet>
+				<h:column>
+					<h:outputText action="" value="Name : #{result.name}"></h:outputText>
+	                </h:column>
+	        </h:dataTable>
+	       
+        </span>
         </h:form>
     </ui:define>
 </ui:composition>

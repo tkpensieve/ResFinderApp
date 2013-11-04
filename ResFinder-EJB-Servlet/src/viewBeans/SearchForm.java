@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import ejb.Entity.Location;
+import ejb.Entity.Restaurant;
 import ejb.Service.LocationService;
 import ejb.Service.RestaurantService;
 
@@ -22,7 +23,11 @@ public class SearchForm {
 	
 	Location selectedLocation;
 	Map<String, Object> allLocations = new HashMap<String, Object>();
+	ArrayList<Restaurant> filteredRestaurants;
 	
+	public SearchForm() { 
+		this.filteredRestaurants = new ArrayList<Restaurant>();
+	}
 	public Map<String, Object> getAllLocations() {
 		if(allLocations.isEmpty()){
 			HashMap<String, Object> allLocations = new HashMap<String,Object>();
@@ -47,12 +52,16 @@ public class SearchForm {
 		this.selectedLocation = selectedLocation;
 	}
 
-	public SearchForm() { 
-		
+	public ArrayList<Restaurant> getFilteredRestaurants() {
+		return filteredRestaurants;
+	}
+
+	public void setFilteredRestaurants(ArrayList<Restaurant> filteredRestaurants) {
+		this.filteredRestaurants = filteredRestaurants;
 	}
 	
 	public void filter()
 	{
-		restaurantService.filter(selectedLocation);
+		setFilteredRestaurants(restaurantService.filter(selectedLocation));
 	}
 }
