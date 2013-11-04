@@ -26,7 +26,7 @@ public class HelloWorldServlet extends HttpServlet {
    static String PAGE_FOOTER = "</body></html>";
 
   
-   @Inject
+   @EJB
    public UserService userService;
   
    
@@ -48,23 +48,29 @@ public class HelloWorldServlet extends HttpServlet {
        writer.println(PAGE_HEADER);
       
        User user = new User();
-       user.setId("tk");
-       user.setName("tk");
+       user=userService.findById("tk");
+       /*user.setId("ak");
+       user.setName("ak");
        
-       user.setEmailId("tk");
-       user.setPassword("tk");
+       user.setEmailId("ak");
+       user.setPassword("ak");*/
 	      // writer.println("<h1>" + helloService.createHelloMessage("Rajiv") + "</h1>");
        try
        {
     	
-      writer.println("<h1>" + userService.createUser(user) + "</h1>");
+      writer.println("<h1>" + user.getName() + "</h1>");
        }
        catch(Exception e)
        {
 
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			writer.println(errors.toString());
+			String [] s=errors.toString().split("at");
+			for(String s1 : s)
+			{
+				writer.println(s1);
+			}
+			
        }
        writer.println("grsfgrsfrs");
        writer.println(PAGE_FOOTER);

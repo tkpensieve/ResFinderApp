@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import java.io.*;
 @Stateless
+@LocalBean
 public class UserService {
     @PersistenceContext(unitName="resFinder-ejb-entities")
 	EntityManager em;
@@ -28,7 +29,7 @@ public class UserService {
 		
 			
 	}
-	public User findById(int id)
+	public User findById(String id)
 	{
 		User u=em.find(User.class,id);
 		return u;
