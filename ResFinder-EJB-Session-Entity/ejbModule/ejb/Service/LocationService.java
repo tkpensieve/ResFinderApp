@@ -3,8 +3,6 @@ package ejb.Service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -34,13 +32,11 @@ public class LocationService {
 		}		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<Location> findAll()
 	{
-		ArrayList<Location> allLocations = new ArrayList<Location>();
-		List<Location> results = em.createQuery("SELECT p FROM Person p").getResultList();
-		if(results.size() > 0)
-			allLocations.addAll(results);
-		return allLocations;
+		ArrayList<Location> results = (ArrayList<Location>) em.createQuery("SELECT l FROM Location l").getResultList();
+		return results;
 	}
 	
 	public Location findById(int id)

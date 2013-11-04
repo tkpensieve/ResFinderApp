@@ -2,12 +2,14 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
+import java.util.ArrayList;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import ejb.Entity.Location;
 import ejb.Entity.Restaurant;
 
 /**
@@ -36,29 +38,34 @@ public class RestaurantService {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}	
 	}
+    
 	public Restaurant findById(int id)
 	{
 		Restaurant u=em.find(Restaurant.class,id);
 		return u;
 	}
+	
 	public void delete(int id)
 	{
 		Restaurant u=em.find(Restaurant.class,id);
 		em.remove(u);
 	}
+	
 	public void update(Restaurant u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
-		em.getTransaction().commit();
-		
-		
+		em.getTransaction().commit();	
 	}
 
+	@SuppressWarnings("unchecked")
+	public ArrayList<Restaurant> filter(Location location)
+	{
+		Query query = em.createQuery("SELECT r FROM Restaurant where locationId = :location");
+		query.setParameter("location", location.getId());
+		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
+		return results; 
+	}
 }
