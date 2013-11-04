@@ -41,12 +41,12 @@ public class ManagerService {
 		
 			
 	}
-	public Manager findById(int id)
+	public Manager findById(String id)
 	{
 		Manager u=em.find(Manager.class,id);
 		return u;
 	}
-	public void delete(int id)
+	public void delete(String id)
 	{
 		Manager u=em.find(Manager.class,id);
 		em.remove(u);

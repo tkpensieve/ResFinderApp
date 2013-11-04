@@ -48,7 +48,7 @@ public class HelloWorldServlet extends HttpServlet {
        writer.println(PAGE_HEADER);
       
        User user = new User();
-       user=userService.findById("tk");
+       
        /*user.setId("ak");
        user.setName("ak");
        
@@ -57,7 +57,7 @@ public class HelloWorldServlet extends HttpServlet {
 	      // writer.println("<h1>" + helloService.createHelloMessage("Rajiv") + "</h1>");
        try
        {
-    	
+    	   userService.delete("tk");
       writer.println("<h1>" + user.getName() + "</h1>");
        }
        catch(Exception e)

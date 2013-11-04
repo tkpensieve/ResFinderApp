@@ -34,7 +34,7 @@ public class UserService {
 		User u=em.find(User.class,id);
 		return u;
 	}
-	public void delete(int id)
+	public void delete(String id)
 	{
 		User u=em.find(User.class,id);
 		em.remove(u);
