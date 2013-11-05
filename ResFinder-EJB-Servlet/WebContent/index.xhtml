@@ -5,12 +5,16 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core">
+   
 
+ 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-        <h:form> 
+        <h:form> 	
+        	<h:outputText value="Welcome! Search for a Restaurant"/><br/>
         	<h:outputLabel value="Location: " />
             <h:selectOneRadio id="filteredLocation" layout="pageDirection" value="#{SearchForm.selectedLocationId}">
+           
 				<f:selectItems value="#{SearchForm.allLocations}" />
   			</h:selectOneRadio>  
         	<h:outputLabel value="Cuisine " />
@@ -41,4 +45,5 @@
         </h:form>
     </ui:define>
 </ui:composition>
+
 </html>

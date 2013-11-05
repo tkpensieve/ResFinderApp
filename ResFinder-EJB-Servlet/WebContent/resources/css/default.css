@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+
+body
+{
+	background-image: url("http://localhost:8080/ResFinder-EJB-Servlet/resources/images/restaurant.jpeg");
+}
