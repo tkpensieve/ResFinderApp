@@ -2,11 +2,11 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
-
 
 import ejb.Entity.Cuisine;
 
@@ -34,11 +34,16 @@ public class CuisineService {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}		
 	}
+    
+    @SuppressWarnings("unchecked")
+	public ArrayList<Cuisine> findAll()
+	{
+		ArrayList<Cuisine> results = (ArrayList<Cuisine>) em.createQuery("SELECT c FROM Cuisine c").getResultList();
+		return results;
+	}
+    
 	public Cuisine findById(int id)
 	{
 		Cuisine u=em.find(Cuisine.class,id);

@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @NamedQuery(
-        name="Restaurant.fetchForALocation",
-        query="SELECT r FROM Restaurant r WHERE r.location.id = :locationId"
+        name="Restaurant.fetchForLocationAndCuisine",
+        query="SELECT r FROM Restaurant r INNER JOIN r.cuisines c WHERE c.id = :cuisineId and r.location.id = :locationId"
         )
 @Entity
 @Table(name = "RESTAURANT")
@@ -35,7 +35,8 @@ public class Restaurant implements Serializable {
 	Manager manager;
 	@ManyToMany
 	@JoinTable(name="RESTAURANTCUISINEMAP",
-               joinColumns=@JoinColumn(name="RESTAURANTID", referencedColumnName="ID"))
+               joinColumns=@JoinColumn(name="RESTAURANTID", referencedColumnName="ID"),
+               inverseJoinColumns=@JoinColumn(name="CUISINEID", referencedColumnName="ID"))
 	List<Cuisine> cuisines;
 	
 	String address;

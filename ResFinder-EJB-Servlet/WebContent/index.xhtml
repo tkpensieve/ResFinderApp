@@ -8,13 +8,19 @@
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-        <h:form>
-            <h:selectOneMenu id="filterLocation" value="#{SearchForm.selectedLocationId}">
+        <h:form> 
+        	<h:outputLabel value="Location: " />
+            <h:selectOneRadio id="filteredLocation" layout="pageDirection" value="#{SearchForm.selectedLocationId}">
 				<f:selectItems value="#{SearchForm.allLocations}" />
-  			</h:selectOneMenu> 
+  			</h:selectOneRadio>  
+        	<h:outputLabel value="Cuisine " />
+            <h:selectOneRadio id="filteredCuisine" layout="pageDirection" value="#{SearchForm.selectedCuisineId}">
+				<f:selectItems value="#{SearchForm.allCuisines}" />
+  			</h:selectOneRadio> 
             <h:commandButton value="Search">
-            	<f:ajax listener="#{SearchForm.filter()}" execute="filterLocation" render="resultsDiv" />
+            	<f:ajax listener="#{SearchForm.filter()}" execute="filteredLocation filteredCuisine" render="resultsDiv" />
             </h:commandButton>
+            
             <h:panelGroup id="resultsDiv">   	      
 	        <h:dataTable id="searchResults" value="#{SearchForm.filteredRestaurants}" var="result">
 	        	<h:column>

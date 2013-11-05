@@ -8,10 +8,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import ejb.Entity.Location;
 import ejb.Entity.Restaurant;
 
 /**
@@ -62,10 +60,11 @@ public class RestaurantService {
 		em.getTransaction().commit();	
 	}
 
-	public ArrayList<Restaurant> filter(int locationId)
+	public ArrayList<Restaurant> filter(int locationId, int cuisineId)
 	{
-		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchForALocation", Restaurant.class);
+		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchForLocationAndCuisine", Restaurant.class);
         query.setParameter("locationId", locationId);
+        query.setParameter("cuisineId", cuisineId);
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
 	}
