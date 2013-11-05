@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <title>Restaurant Home Page</title>
+    </h:head>
+    
+    <body>
+	            
+	            <p>Restaurant Name: <h:outputText value="#{result.name}" /> <br />
+	            <p>Restaurant Cuisine: <h:outputText value="#{result.rating}" /> <br />
+	            <p>Restautant Address: <h:outputText value="#{result.address}" /> <br />
+	            <p>Restaurant Cuisine: <h:dataTable  value="#{result.cuisines}" var="result">
+                        <h:column>
+                                <h:outputText value="#{result.cuisines.indexOf(result) + 1})"></h:outputText>
+                        </h:column>
+	            <p>Restaurant Location: <h:dataTable  value="#{result.location}" var="result">
+                        <h:column>
+                                <h:outputText value="#{result.location.indexOf(result) + 1})"></h:outputText>
+                        </h:column>
+    </body>
+</html>
