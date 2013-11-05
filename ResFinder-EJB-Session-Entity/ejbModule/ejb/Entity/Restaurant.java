@@ -34,7 +34,7 @@ public class Restaurant implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "MANAGERID")
 	Manager manager;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="RESTAURANTCUISINEMAP",
                joinColumns=@JoinColumn(name="RESTAURANTID", referencedColumnName="ID"),
                inverseJoinColumns=@JoinColumn(name="CUISINEID", referencedColumnName="ID"))

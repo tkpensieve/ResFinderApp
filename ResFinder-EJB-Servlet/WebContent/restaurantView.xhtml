@@ -13,6 +13,10 @@
     <br/>
     <h:outputText value=" Address:#{Resview.address}" />
     <br/>
+    <ui:repeat value="#{Resview.cuis}" var="item">
+    <br/>
+    Cuisine:#{item.name}
+	</ui:repeat>
     <ui:repeat value="#{Resview.rev}" var="item">
     <br/>
     Review:<p style="color:green">#{item.content}</p> Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category}<br/>

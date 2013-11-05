@@ -19,10 +19,8 @@ public class CuisineService {
 	 @PersistenceContext(unitName="resFinder-ejb-entities")
 		EntityManager em;
 
-    /**
-     * Default constructor. 
-     */
    
+	
     public String createCuisine(Cuisine res) {
 		try{
 		em.persist(res);
@@ -60,8 +58,8 @@ public class CuisineService {
 		em.getTransaction().begin();
 		em.merge(u);
 		em.getTransaction().commit();
-		
-		
+	
 	}
+
 
 }

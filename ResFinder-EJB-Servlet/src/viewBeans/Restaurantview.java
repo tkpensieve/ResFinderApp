@@ -64,6 +64,12 @@ public class Restaurantview {
 	
 	
 	ArrayList<Review> rev;
+	List<Cuisine> cuis;
+	
+	public List<Cuisine> getcuis()
+	{
+		return res.getCuisines();
+	}
 
 	
 

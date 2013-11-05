@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import ejb.Entity.Cuisine;
 import ejb.Entity.Restaurant;
 
 /**
@@ -59,7 +60,7 @@ public class RestaurantService {
 		em.merge(u);
 		em.getTransaction().commit();	
 	}
-
+	
 	public ArrayList<Restaurant> filter(int locationId, int cuisineId)
 	{
 		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchForLocationAndCuisine", Restaurant.class);
@@ -68,4 +69,5 @@ public class RestaurantService {
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
 	}
+
 }
