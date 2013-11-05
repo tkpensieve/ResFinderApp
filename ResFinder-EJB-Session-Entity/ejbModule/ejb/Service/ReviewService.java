@@ -2,12 +2,13 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-
+import ejb.Entity.Cuisine;
 import ejb.Entity.Review;
 
 /**
@@ -39,6 +40,11 @@ public class ReviewService {
 		
 			
 	}
+    public ArrayList<Review> getReviews(int id)
+    {
+    	ArrayList<Review> results = (ArrayList<Review>) em.createQuery("SELECT c FROM Review c where c.restaurant.id="+id).getResultList();
+		return results;
+    }
 	public Review findById(int id)
 	{
 		Review u=em.find(Review.class,id);

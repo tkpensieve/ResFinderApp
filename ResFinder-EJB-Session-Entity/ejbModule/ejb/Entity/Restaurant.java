@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,7 +45,7 @@ public class Restaurant implements Serializable {
 	@JoinColumn(name = "LOCATIONID")
 	Location location;
 	int rating;
-	@OneToMany(orphanRemoval=true)
+	@OneToMany(orphanRemoval=true,fetch = FetchType.LAZY)
 	@JoinColumn(name="RESTAURANTID") 
 //	@OneToMany(cascade=CascadeType.ALL)
 	List<Review> reviews;

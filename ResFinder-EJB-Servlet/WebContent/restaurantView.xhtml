@@ -8,6 +8,15 @@
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
+    
+    <h:outputText value="Name:#{Resview.name}" />
+    <br/>
+    <h:outputText value=" Address:#{Resview.address}" />
+    <br/>
+    <ui:repeat value="#{Resview.rev}" var="item">
+    <br/>
+    #{item.content}<br/>
+	</ui:repeat>
         
     </ui:define>
 </ui:composition>

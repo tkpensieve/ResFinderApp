@@ -82,6 +82,13 @@ public class Review implements Serializable{
 		return dateTimeAdded;
 	}
 	public void setDateTimeAdded(Date dateTimeAdded) {
-		this.dateTimeAdded = dateTimeAdded;
+		if(dateTimeAdded==null)
+		{
+			this.dateTimeAdded=new Date();
+		}
+		else
+		{
+			this.dateTimeAdded = dateTimeAdded;
+		}
 	}
 }
