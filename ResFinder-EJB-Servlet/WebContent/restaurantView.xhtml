@@ -15,7 +15,7 @@
     <br/>
     <ui:repeat value="#{Resview.rev}" var="item">
     <br/>
-    #{item.content}<br/>
+    Review:<p style="color:green">#{item.content}</p> Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category}<br/>
 	</ui:repeat>
         
     </ui:define>
