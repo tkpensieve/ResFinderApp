@@ -13,14 +13,22 @@
 				<f:selectItems value="#{SearchForm.allLocations}" />
   			</h:selectOneMenu> 
             <h:commandButton value="Search">
-            	<f:ajax listener="#{SearchForm.filter()}" execute="filterLocation" render="resultDiv" />
+            	<f:ajax listener="#{SearchForm.filter()}" execute="filterLocation" render="resultsDiv" />
             </h:commandButton>
-            <h:panelGroup id="resultDiv">
-			<br/>
-			<br/>        	      
+            <h:panelGroup id="resultsDiv">   	      
 	        <h:dataTable id="searchResults" value="#{SearchForm.filteredRestaurants}" var="result">
+	        	<h:column>
+	        		<h:outputText value="#{SearchForm.filteredRestaurants.indexOf(result) + 1})"></h:outputText>
+	        	</h:column>
 				<h:column>
-					<h:outputText action="" value="Name : #{result.name}"></h:outputText>
+					<h:link value="#{result.name}" outcome="restaurantView">
+						<f:param name="id" value="#{result.id}" />
+					</h:link>
+					<br/>
+					<h:outputText value="#{result.rating}*"></h:outputText>
+	            </h:column>
+	            <h:column>
+					<h:outputText value="#{result.address}"></h:outputText>
 	            </h:column>
 	        </h:dataTable>
         	</h:panelGroup>
