@@ -9,10 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+@NamedQuery(
+        name="Restaurant.fetchForALocation",
+        query="SELECT r FROM Restaurant r WHERE r.location.id = :locationId"
+        )
 @Entity
 @Table(name = "RESTAURANT")
 public class Restaurant implements Serializable {
@@ -26,21 +31,20 @@ public class Restaurant implements Serializable {
 	int id;
 	String name;
 	@OneToOne
-	@JoinColumn(name = "ManagerId")
+	@JoinColumn(name = "MANAGERID")
 	Manager manager;
 	@ManyToMany
 	@JoinTable(name="RESTAURANTCUISINEMAP",
-        joinColumns=
-            @JoinColumn(name="RestaurantId", referencedColumnName="Id"))
+               joinColumns=@JoinColumn(name="RESTAURANTID", referencedColumnName="ID"))
 	List<Cuisine> cuisines;
 	
 	String address;
-	@OneToOne
-	@JoinColumn(name = "LocationId")
+	@ManyToOne
+	@JoinColumn(name = "LOCATIONID")
 	Location location;
 	int rating;
 	@OneToMany(orphanRemoval=true)
-	@JoinColumn(name="RestaurantId") 
+	@JoinColumn(name="RESTAURANTID") 
 //	@OneToMany(cascade=CascadeType.ALL)
 	List<Review> reviews;
 	
@@ -55,7 +59,7 @@ public class Restaurant implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
+	}	
 	public Manager getManager() {
 		return manager;
 	}

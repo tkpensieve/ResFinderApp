@@ -28,7 +28,7 @@ public class ManagerService {
     public String createManager(Manager res) {
 		try{
 		em.persist(res);
-		String beanID = res.getId();
+		int beanID = res.getId();
 		return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
@@ -53,12 +53,9 @@ public class ManagerService {
 	}
 	public void update(Manager u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
-		em.getTransaction().commit();
-		
-		
+		em.getTransaction().commit();	
 	}
 
 }

@@ -9,24 +9,21 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h:selectOneMenu id="filterLocation" value="#{SearchForm.selectedLocation}">
+            <h:selectOneMenu id="filterLocation" value="#{SearchForm.selectedLocationId}">
 				<f:selectItems value="#{SearchForm.allLocations}" />
   			</h:selectOneMenu> 
             <h:commandButton value="Search">
             	<f:ajax listener="#{SearchForm.filter()}" execute="filterLocation" render="resultDiv" />
             </h:commandButton>
-            <span id="resultDiv" >
+            <h:panelGroup id="resultDiv">
 			<br/>
-			<br/>        
-	      
+			<br/>        	      
 	        <h:dataTable id="searchResults" value="#{SearchForm.filteredRestaurants}" var="result">
-	        	<f:facet name="header">Team Name</f:facet>
 				<h:column>
 					<h:outputText action="" value="Name : #{result.name}"></h:outputText>
-	                </h:column>
+	            </h:column>
 	        </h:dataTable>
-	       
-        </span>
+        	</h:panelGroup>
         </h:form>
     </ui:define>
 </ui:composition>

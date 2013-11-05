@@ -21,7 +21,7 @@ public class SearchForm {
 	@EJB
 	private RestaurantService restaurantService;
 	
-	Location selectedLocation;
+	int selectedLocationId;
 	Map<String, Object> allLocations = new HashMap<String, Object>();
 	ArrayList<Restaurant> filteredRestaurants;
 	
@@ -44,12 +44,12 @@ public class SearchForm {
 		this.allLocations = allLocations;
 	}
 
-	public Location getSelectedLocation() {
-		return selectedLocation;
+	public int getSelectedLocationId() {
+		return selectedLocationId;
 	}
 
-	public void setSelectedLocation(Location selectedLocation) {
-		this.selectedLocation = selectedLocation;
+	public void setSelectedLocationId(int selectedLocationId) {
+		this.selectedLocationId = selectedLocationId;
 	}
 
 	public ArrayList<Restaurant> getFilteredRestaurants() {
@@ -62,6 +62,7 @@ public class SearchForm {
 	
 	public void filter()
 	{
-		setFilteredRestaurants(restaurantService.filter(selectedLocation));
+		ArrayList<Restaurant> filter = restaurantService.filter(selectedLocationId);
+		this.setFilteredRestaurants(filter);
 	}
 }

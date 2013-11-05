@@ -3,11 +3,13 @@ package ejb.Service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import ejb.Entity.Location;
 import ejb.Entity.Restaurant;
@@ -60,11 +62,10 @@ public class RestaurantService {
 		em.getTransaction().commit();	
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<Restaurant> filter(Location location)
+	public ArrayList<Restaurant> filter(int locationId)
 	{
-		Query query = em.createQuery("SELECT r FROM Restaurant where locationId = :location");
-		query.setParameter("location", location.getId());
+		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchForALocation", Restaurant.class);
+        query.setParameter("locationId", locationId);
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
 	}

@@ -1,19 +1,40 @@
 package ejb.Entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "MANAGER")
-public class Manager extends Person{
+public class Manager implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-//	Restaurant restaurant;
+	@Id
+	int id;
+	@OneToOne
+	@JoinColumn(name = "USERID")
+	User user;
 	String phone;
 	String address;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getPhone() {
 		return phone;
 	}
