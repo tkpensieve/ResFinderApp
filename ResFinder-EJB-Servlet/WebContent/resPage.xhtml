@@ -13,16 +13,16 @@
     
     <body>
 	            
-	            <p>Restaurant Name: <h:outputText value="#{result.name}" /> <br />
-	            <p>Restaurant Cuisine: <h:outputText value="#{result.rating}" /> <br />
-	            <p>Restautant Address: <h:outputText value="#{result.address}" /> <br />
-	            <p>Restaurant Cuisine: <h:dataTable  value="#{result.cuisines}" var="result">
+	            <p>Restaurant Name: <h:outputText value="#{resPage.name}" /> <br />
+	            <p>Restaurant Cuisine: <h:outputText value="#{resPage.rating}" /> <br />
+	            <p>Restautant Address: <h:outputText value="#{resPage.address}" /> <br />
+	            <p>Restaurant Cuisine: <h:dataTable  value="#{resPage.cuisines}" var="result">
                         <h:column>
-                                <h:outputText value="#{result.cuisines.indexOf(result) + 1})"></h:outputText>
+                                <h:outputText value="#{resPage.cuisines.indexOf(result) + 1})"></h:outputText>
                         </h:column>
-	            <p>Restaurant Location: <h:dataTable  value="#{result.location}" var="result">
+	            <p>Restaurant Location: <h:dataTable  value="#{resPage.location}" var="result">
                         <h:column>
-                                <h:outputText value="#{result.location.indexOf(result) + 1})"></h:outputText>
+                                <h:outputText value="#{resPage.location.indexOf(result) + 1})"></h:outputText>
                         </h:column>
     </body>
 </html>
