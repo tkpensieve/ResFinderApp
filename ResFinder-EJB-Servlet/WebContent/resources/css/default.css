@@ -2,5 +2,9 @@
 
 body
 {
-	background-image: url("http://localhost:8080/ResFinder-EJB-Servlet/resources/images/restaurant.jpeg");
+	/*background: url("http://localhost:8080/ResFinder-EJB-Servlet/resources/images/restaurant.jpeg") no-repeat center fixed;
+	color:white;*/
+	font-size:20px;
+	
+	/*background-size: cover;*/
 }

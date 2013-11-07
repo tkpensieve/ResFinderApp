@@ -16,10 +16,11 @@
     <ui:repeat value="#{Resview.cuis}" var="item">
     <br/>
     Cuisine:#{item.name}
-	</ui:repeat>
+	</ui:repeat><br/><br/>
+	<span style="font-size:35px">Reviews</span>
     <ui:repeat value="#{Resview.rev}" var="item">
     <br/>
-    Review:<p style="color:green">#{item.content}</p> Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category}<br/>
+    <span style="font-size:15px">Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category} Date added:#{item.dateTimeAdded}</span><hr/><p style="color:green">#{item.content}</p><hr/>
 	</ui:repeat>
         
     </ui:define>

@@ -2,6 +2,7 @@ package viewBeans;
 
 import java.util.*;
 
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -38,6 +39,24 @@ public class Restaurantview {
 	}
 	public ArrayList<Review> getRev()
 	{
+		Collections.sort(rev, new Comparator<Review>(){
+			
+			
+			public int compare(Review x, Review y) 
+			{
+		   
+		    int startComparison = compare(x.getDateTimeAdded(), y.getDateTimeAdded());
+		    return startComparison != 0 ? startComparison
+		                                : compare(x.getDateTimeAdded(), y.getDateTimeAdded());
+		  }
+
+		 
+		  private  int compare(Date a, Date b) {
+		    return a.before(b) ? -1
+		         : a.after(b) ? 1
+		         : 0;
+		  }
+		});
 		return rev;
 	}
 	int selectedLocationId;
