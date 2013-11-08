@@ -12,17 +12,23 @@
     <ui:define name="content">
         <h:commandButton value="Login/Register"/>
         <h:form id="LoginForm">
-        	<h:outputLabel value="UserName: " />
-        	<h:inputText value="#{SearchForm.loginDetails.userName}" />
-        	<br/>
-        	<h:outputLabel value="Password: " />
-        	<h:inputText value="#{SearchForm.loginDetails.password}" />
+        <table>
+        <tr>
+        	<td><h:outputLabel value="UserName: " /></td>
+        	<td><h:inputText value="#{SearchForm.loginDetails.userName}" /></td>
+        	</tr>
+        	<tr>
+        	<td><h:outputLabel value="Password: " /></td>
+        	<td><h:inputText value="#{SearchForm.loginDetails.password}" /></td>
+        	</tr>
+        	<tr>
         	<h:panelGroup id="registerEvent" style="display:hidden">
-        		<br/>
-        		<h:outputLabel value="EmailId: " />
-        		<h:inputText value="#{SearchForm.loginDetails.registerEmail}" />
+        		
+        	<td>	<h:outputLabel value="EmailId: " /></td>
+        	<td>	<h:inputText value="#{SearchForm.loginDetails.registerEmail}" /></td>
         	</h:panelGroup>
-        	<br/>
+        	</tr>
+        	</table>
         	<h:commandButton value="Login"/> or <h:commandButton value="Register"/>
         </h:form>
         <h:form id="SearchRestaurantForm"> 	

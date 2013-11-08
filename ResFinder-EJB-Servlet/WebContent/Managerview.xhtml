@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+<ui:define name="content">
+<h:outputScript>
+function addRes()
+{
+	e=document.getElementById("a");
+	e.style.visibility="visible";
+	e=document.getElementById("b");
+	p=e.parentNode;
+	p.removeChild(e);
+	
+	
+}
+</h:outputScript>
+
+<h:body>
+
+<button onclick="addRes()" id="b">Add a Restaurant</button><br/>
+
+<div id="a" style="visibility:hidden">
+	<h3>
+	Enter the details
+	</h3>
+	<table>
+	<tr><td> Restaurant name</td>
+	<td> <h:inputText value="#{Manview.restaurantName}" /></td>
+	</tr>
+	<tr>
+	<td>Address</td><td><h:inputTextarea value="#{Manview.address}" /></td>
+	</tr>
+	<tr>
+	<td>Cuisine(comma separated if more than one)</td><td><h:inputTextarea value="#{Manview.cuisine}" /></td>
+	</tr>
+	</table>
+	
+	<h:commandButton action="welcome" value="Submit" />
+	</div>
+	</h:body>
+</ui:define>
+	</ui:composition>
+	</html>
+	
+
+
+	
+	
+	
