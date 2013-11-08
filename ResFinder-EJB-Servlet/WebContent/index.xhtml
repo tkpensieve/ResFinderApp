@@ -10,11 +10,25 @@
  
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-        <h:form> 	
+        <h:commandButton value="Login/Register"/>
+        <h:form id="LoginForm">
+        	<h:outputLabel value="UserName: " />
+        	<h:inputText value="#{SearchForm.loginDetails.userName}" />
+        	<br/>
+        	<h:outputLabel value="Password: " />
+        	<h:inputText value="#{SearchForm.loginDetails.password}" />
+        	<h:panelGroup id="registerEvent" style="display:hidden">
+        		<br/>
+        		<h:outputLabel value="EmailId: " />
+        		<h:inputText value="#{SearchForm.loginDetails.registerEmail}" />
+        	</h:panelGroup>
+        	<br/>
+        	<h:commandButton value="Login"/> or <h:commandButton value="Register"/>
+        </h:form>
+        <h:form id="SearchRestaurantForm"> 	
         	<h:outputText value="Welcome! Search for a Restaurant"/><br/>
         	<h:outputLabel value="Location: " />
             <h:selectOneRadio id="filteredLocation" layout="pageDirection" value="#{SearchForm.selectedLocationId}">
-           
 				<f:selectItems value="#{SearchForm.allLocations}" />
   			</h:selectOneRadio>  
         	<h:outputLabel value="Cuisine " />

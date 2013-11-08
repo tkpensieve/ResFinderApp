@@ -22,6 +22,7 @@ public class Restaurantview {
 	private ReviewService rs;
 	@ManagedProperty(value="#{param['id']}")
 	int resId;
+	
 	public int getResId() {
 		return resId;
 	}
@@ -34,8 +35,6 @@ public class Restaurantview {
 	public String getAddress()
 	{
 		return address;
-		
-		
 	}
 	public ArrayList<Review> getRev()
 	{
@@ -59,9 +58,6 @@ public class Restaurantview {
 		});
 		return rev;
 	}
-	int selectedLocationId;
-	Map<String, Object> allLocations = new HashMap<String, Object>();
-	ArrayList<Restaurant> filteredRestaurants;
 	
 	@PostConstruct
 	public void fillRes()
@@ -72,15 +68,12 @@ public class Restaurantview {
 		rev=rs.getReviews(resId);
 	}
 	
-	
-	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	
 	ArrayList<Review> rev;
 	List<Cuisine> cuis;
@@ -89,7 +82,4 @@ public class Restaurantview {
 	{
 		return res.getCuisines();
 	}
-
-	
-
 }

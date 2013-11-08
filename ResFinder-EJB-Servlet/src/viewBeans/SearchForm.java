@@ -30,7 +30,16 @@ public class SearchForm {
 	Map<String, Object> allLocations = new HashMap<String, Object>();
 	Map<String, Object> allCuisines = new HashMap<String, Object>();
 	ArrayList<Restaurant> filteredRestaurants;
+	LoginDetails loginDetails;
 	
+	public LoginDetails getLoginDetails() {
+		return loginDetails;
+	}
+
+	public void setLoginDetails(LoginDetails loginDetails) {
+		this.loginDetails = loginDetails;
+	}
+
 	public SearchForm() { 
 		this.filteredRestaurants = new ArrayList<Restaurant>();
 	}
