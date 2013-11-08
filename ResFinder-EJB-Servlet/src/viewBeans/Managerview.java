@@ -7,15 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 import ejb.Entity.*;
 import ejb.Service.*;
@@ -24,7 +16,7 @@ import ejb.Service.*;
 @RequestScoped
 public class Managerview {
 	@EJB
-	private RestaurantService rs;
+	private RequestService r;
 	
 	String userid;
 	
@@ -61,6 +53,16 @@ public class Managerview {
 	String cuisine;
 	
 	RequestStatus status;
+	public void createRequest()
+	{
+		status=RequestStatus.PENDING;
+		a=new AddRestaurantRequest();
+		a.setAddress(address);
+		a.setCuisine(cuisine);
+		a.setRestaurantName(restaurantName);
+		r.createAddRestaurantRequest(a);
+		
+	}
 	
 	
 	
