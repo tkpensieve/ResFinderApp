@@ -2,13 +2,14 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-
 import ejb.Entity.AddRestaurantRequest;
+import ejb.Entity.Review;
 
 /**
  * Session Bean implementation class AddRestaurantRequestService
@@ -27,7 +28,7 @@ public class RequestService {
 		try{
 		em.persist(res);
 		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+		return "Success";
 		}
 		catch(Exception e)
 		{
@@ -58,5 +59,10 @@ public class RequestService {
 		
 		
 	}
+	public ArrayList<AddRestaurantRequest> getReviews()
+    {
+    	ArrayList<AddRestaurantRequest> results = (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a").getResultList();
+		return results;
+    }
 
 }

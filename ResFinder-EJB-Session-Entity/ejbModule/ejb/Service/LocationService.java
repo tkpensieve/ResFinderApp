@@ -8,6 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
+import ejb.Entity.Cuisine;
 import ejb.Entity.Location;
 
 /**
@@ -57,6 +58,10 @@ public class LocationService {
 		em.getTransaction().begin();
 		em.merge(u);
 		em.getTransaction().commit();	
+	}
+	public Location findLoc(String name)
+	{
+		return (Location)em.createQuery("select c from location c where c.name="+name);
 	}
 
 }

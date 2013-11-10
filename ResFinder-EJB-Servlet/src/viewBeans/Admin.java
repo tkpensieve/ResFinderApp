@@ -39,14 +39,13 @@ public class Admin {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
-	public void validate()
+	public String validate()
 	{
 		if(userName.equals("admin")&&password.equals("admin"))
 		{
-			auth= "valid";
+			return "approve.jsf?faces-redirect=true";
 		}
-		else
-			auth= "invalid";
+		return "";
 	}
 			
 		

@@ -60,6 +60,10 @@ public class CuisineService {
 		em.getTransaction().commit();
 	
 	}
+	public Cuisine findCuisine(String name)
+	{
+		return (Cuisine)em.createQuery("select c from cuisine c where c.name="+name );
+	}
 
 
 }

@@ -18,13 +18,13 @@
         	</tr>
         	
         	</table>
-        	<h:commandButton value="Login" >
-        		<f:ajax listener="#{Admin.validate()}" execute="a b" render="resultsDiv"></f:ajax>
+        	<h:commandButton value="Login"  action=##{Admin.validate()}/>
+        <!-- 		<f:ajax listener="#{Admin.validate()}" execute="a b" render="resultsDiv"></f:ajax>
         	</h:commandButton>
         
         <h:panelGroup id="resultsDiv">
         <h:outputText value="#{Admin.auth}"/>
-        </h:panelGroup>
+        </h:panelGroup>-->
         </h:form>
         </ui:define>
         </ui:composition>
