@@ -19,6 +19,11 @@ import ejb.Service.*;
 public class Admin {
 	
 	String userName;
+	public Admin()
+	{
+		userName="";
+		password="";
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -45,7 +50,7 @@ public class Admin {
 		{
 			return "approve.jsf?faces-redirect=true";
 		}
-		return "";
+		return "a";
 	}
 			
 		

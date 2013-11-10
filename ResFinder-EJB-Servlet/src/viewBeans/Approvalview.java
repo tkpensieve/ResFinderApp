@@ -58,8 +58,7 @@ public class Approvalview {
 		}
 		r.setCuisines(clist);
 		
-		Location l=ls.findLoc(e.getLocation());
-		r.setLocation(l);
+	
 		r.setManager(e.getManager());
 		r.setName(e.getRestaurantName());
 		status=resservice.createRestaurant(r);

@@ -19,7 +19,7 @@
     </h:outputScript>
     <ui:repeat value="#{Approval.alist}" var="item">
     <br/>
-    Cuisine:#{item.restaurantName} <h:inputHidden id="#{item.id}" value="#{item.id}" />
+    <span id="#{item.id}">Cuisine:#{item.restaurantName} </span>
   
      <h:commandButton value="Approve">
             	<f:ajax listener="#{Approval.approve()}" execute="#{item.id}" render="resultsDiv" onevent="hide(#{Approval.status},#{item.id}"/>

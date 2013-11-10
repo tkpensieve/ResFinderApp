@@ -3,6 +3,7 @@ package ejb.Entity;
 import java.io.Serializable;
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,13 +30,9 @@ public class AddRestaurantRequest implements Serializable {
 	String restaurantName;
 	String address;
 	String cuisine;
-	String Location;
-	public String getLocation() {
-		return Location;
-	}
-	public void setLocation(String location) {
-		Location = location;
-	}
+
+	
+	
 	@Enumerated(EnumType.STRING)
 	RequestStatus status;
 	
