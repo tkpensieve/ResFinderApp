@@ -5,36 +5,29 @@
 
     <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-    <h:outputScript>
-    function redirect1()
-    {
-    	e=document.getElementById("val");
-    	alert("http://localhost:8080/ResFinder-EJB-Servlet/"+e.class);
-    	//window.navigate("http://localhost:8080/ResFinder-EJB-Servlet/"+e.innerHTML);
-    }
-    	</h:outputScript>
-    <h:form id="LoginForm">
-        <table>
-        <tr>
-        	<td><h:outputLabel value="UserName: " /></td>
-        	<td><h:inputText id="a" value="#{Admin.userName}" /></td>
-        	</tr>
-        	<tr>
-        	<td><h:outputLabel value="Password: " /></td>
-        	<td><h:inputSecret id="b" value="#{Admin.password}" /></td>
-        	</tr>
-        	
-        	</table>
-        	<h:commandButton value="Login" action="#{Admin.validate}">
-        	<!-- 	<f:ajax listener="#{Admin.validate()}" execute="a b" render="resultsDiv"></f:ajax>-->
+    	<h:form id="LoginForm">
+        	<table>
+        		<tr>
+        			<td><h:outputLabel value="UserId: " /></td>
+        			<td><h:inputText id="usrId" value="#{NewUserDetails.userId}" /></td>
+        		</tr>
+        		<tr>
+        			<td><h:outputLabel value="Password: " /></td>
+        			<td><h:inputSecret id="passwd" value="#{NewUserDetails.password}" /></td>
+        		</tr>
+        		<tr>
+        			<td><h:outputLabel value="Email: " /></td>
+        			<td><h:inputText id="email" value="#{NewUserDetails.registerEmail}" /></td>
+        		</tr>
+        		<tr>
+        			<td><h:outputLabel value="Name: " /></td>
+        			<td><h:inputText id="name" value="#{NewUserDetails.userName}" /></td>
+        		</tr>
+       		</table>
+        	<h:commandButton value="Register" action="#{NewUserDetails.register()}">
         	</h:commandButton>
-        
-     <!--    <h:panelGroup id="resultsDiv">
-       <p id="val" class="#{Admin.auth} "></p>
-        <h:outputText value="a#{Admin.auth}" />
-        </h:panelGroup>-->
         </h:form>
-        </ui:define>
-        </ui:composition>
-        </html>
+	</ui:define>
+	</ui:composition>
+</html>
         
