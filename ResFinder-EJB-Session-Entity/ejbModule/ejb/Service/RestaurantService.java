@@ -31,14 +31,15 @@ public class RestaurantService {
     public String createRestaurant(Restaurant res) {
 		try{
 		em.persist(res);
-		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+		String name = res.getName();
+		return "Added restaurant:"+name;
 		}
 		catch(Exception e)
 		{
-			StringWriter errors = new StringWriter();
+			/*StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			return errors.toString();
+			return errors.toString();*/
+			return "no";
 		}	
 	}
     
@@ -68,6 +69,16 @@ public class RestaurantService {
         query.setParameter("cuisineId", cuisineId);
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
+	}
+	
+	public ArrayList<Restaurant> fetchByName(String name)
+	{
+		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchRes", Restaurant.class);
+        query.setParameter("name", name);
+        
+		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
+		return results; 
+		
 	}
 
 }

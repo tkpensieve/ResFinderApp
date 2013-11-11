@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import ejb.Entity.AddRestaurantRequest;
+import ejb.Entity.Manager;
 import ejb.Entity.Review;
 
 /**
@@ -61,11 +62,15 @@ public class RequestService {
 	}
 	public ArrayList<AddRestaurantRequest> findByName(String name)
 	{
-		return (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a where a.restaurantName="+name ).getResultList();
+		//return (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a where a.restaurantName="+name ).getResultList();
+		TypedQuery<AddRestaurantRequest> query = em.createNamedQuery("AddRestaurantRequest.fetchrequest", AddRestaurantRequest.class);
+        query.setParameter("name", name);
+        
+		return  (ArrayList<AddRestaurantRequest>)query.getResultList();
 	}
 	public ArrayList<AddRestaurantRequest> getRequests()
     {
-    	ArrayList<AddRestaurantRequest> results = (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a").getResultList();
+    	ArrayList<AddRestaurantRequest> results = (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a where a.status='PENDING'").getResultList();
 		return results;
     }
 

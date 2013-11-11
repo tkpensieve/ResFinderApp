@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import ejb.Entity.Cuisine;
+import ejb.Entity.Restaurant;
 
 /**
  * Session Bean implementation class CuisineService
@@ -60,9 +61,16 @@ public class CuisineService {
 		em.getTransaction().commit();
 	
 	}
-	public Cuisine findCuisine(String name)
+	public ArrayList<Cuisine> findCuisine(String name)
 	{
-		return (Cuisine)em.createQuery("select c from cuisine c where c.name="+name );
+		
+		
+		TypedQuery<Cuisine> query = em.createNamedQuery("Cuisine.fetchCuisine", Cuisine.class);
+        query.setParameter("cuis", name);
+        
+		return (ArrayList<Cuisine>) query.getResultList();
+		
+		
 	}
 
 

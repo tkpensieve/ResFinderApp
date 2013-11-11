@@ -1,14 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
    
 
  
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
     <h:outputScript>
-    function(status,id)
+    function hide(status,id)
     {
     	if(status!="Success")
     		return;
@@ -17,18 +18,20 @@
     	p.deleteChild(e);
     }
     </h:outputScript>
-    <ui:repeat value="#{Approval.alist}" var="item">
-    <br/>
-    <span id="#{item.id}">Cuisine:#{item.restaurantName} </span>
-  
-     <h:commandButton value="Approve">
-            	<f:ajax listener="#{Approval.approve()}" execute="#{item.id}" render="resultsDiv" onevent="hide(#{Approval.status},#{item.id}"/>
-     </h:commandButton>
-            
-              	      
-	</ui:repeat>
-	
-	
+   <h:form id="form">
+	 <c:forEach items="#{Approval.alist}" var="item" varStatus="loop">
+        <tr><td><h:outputText id="table_#{loop.index}_name" value="#{item.restaurantName}" /></td><td><h:commandButton value="Approve">
+       		<f:ajax listener="#{Approval.approve(item.id)}" execute="table_#{loop.index}_name" render="resultsDiv" />
+        </h:commandButton> </td></tr>
+    </c:forEach>
+    
+   
+	<br/>
+	<h:panelGroup id="resultsDiv">
+	<h:outputText value="#{Approval.status}" />
+	</h:panelGroup>
+	</h:form>
     </ui:define>
+    
     </ui:composition>
     </html>

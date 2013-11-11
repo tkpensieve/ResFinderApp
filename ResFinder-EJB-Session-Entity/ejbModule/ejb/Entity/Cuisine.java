@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
+@NamedQuery(
+        name="Cuisine.fetchCuisine",
+        query="SELECT c FROM Cuisine c where c.name =:cuis"
+        )
 @Entity
 @Table(name = "CUISINE")
 public class Cuisine implements Serializable {

@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 import ejb.Entity.Cuisine;
 import ejb.Entity.Location;
+import ejb.Entity.Restaurant;
 
 /**
  * Session Bean implementation class LocationService
@@ -59,9 +60,15 @@ public class LocationService {
 		em.merge(u);
 		em.getTransaction().commit();	
 	}
-	public Location findLoc(String name)
+	public ArrayList<Location> findLoc(String name)
 	{
-		return (Location)em.createQuery("select c from location c where c.name="+name);
+		//return (Location)em.createQuery("select c from location c where c.name="+name);
+		TypedQuery<Location> query = em.createNamedQuery("Location.fetchloc", Location.class);
+        query.setParameter("name", name);
+        
+		ArrayList<Location> results =  (ArrayList<Location>) query.getResultList();
+		return results; 
+		
 	}
 
 }

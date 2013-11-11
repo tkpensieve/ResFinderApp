@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
+@NamedQuery(
+		name="Location.fetchloc",
+		query="select l from Location l where l.name=:name"
+		)
 @Entity
 @Table(name = "LOCATION")
 public class Location implements Serializable {

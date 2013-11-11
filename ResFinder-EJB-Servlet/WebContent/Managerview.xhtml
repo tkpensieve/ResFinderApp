@@ -36,10 +36,12 @@ function addRes()
 	<tr>
 	<td>Cuisine(comma separated if more than one)</td><td><h:inputTextarea id="c" value="#{Manview.cuisine}" /></td>
 	</tr>
+	<tr>
+	<td>Location </td><td><h:inputText id="d" value="#{Manview.location}" /></td></tr>
 	</table>
 	
-	<h:commandButton  value="Submit" execute="a b">
-		<f:ajax listener="#{Manview.createRequest()}" execute="a b c" render="result"/>
+	<h:commandButton  value="Submit" >
+		<f:ajax listener="#{Manview.createRequest()}" execute="a b c d" render="result"/>
 	</h:commandButton>
 		<h:panelGroup id="result">
 		<h:outputText value="#{Manview.added}" /></h:panelGroup>

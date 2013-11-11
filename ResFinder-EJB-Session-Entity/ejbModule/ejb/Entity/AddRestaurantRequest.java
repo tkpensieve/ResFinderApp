@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,8 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
+@NamedQuery(
+        name="AddRestaurantRequest.fetchrequest",
+        query="SELECT a FROM AddRestaurantRequest a where a.restaurantName=:name"
+        )
 @Entity
 @Table(name = "ADDRESTAURANTREQUEST")
 public class AddRestaurantRequest implements Serializable {
@@ -30,9 +36,17 @@ public class AddRestaurantRequest implements Serializable {
 	String restaurantName;
 	String address;
 	String cuisine;
+	
+	String location;
 
 	
 	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
 	@Enumerated(EnumType.STRING)
 	RequestStatus status;
 	

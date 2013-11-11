@@ -21,6 +21,9 @@ public class Managerview {
 	@EJB
 	private ManagerService ms;
 	
+	@EJB
+	private RestaurantService resservice;
+	
 	String userid;
 
 	String password;
@@ -55,7 +58,16 @@ public class Managerview {
 	String address;
 	String cuisine;
 	String added;
+	String location;
 	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public String getAdded() {
 		return added;
 	}
@@ -75,14 +87,20 @@ public class Managerview {
 			added="couldn't add";
 			return;
 		}
+		
+		ArrayList<Restaurant> rlist=resservice.fetchByName(restaurantName);
+		if(rlist.size()!=0)
+		{
+			added="couldn't add";
+			return;
+		}
+		
 		added="added";
-		
-		
-		
 		a.setAddress(address);
 		a.setCuisine(cuisine);
 		a.setRestaurantName(restaurantName);
 		a.setStatus(status);
+		a.setLocation(location);
 		Manager m=ms.findByUserid("abc");
 		a.setManager(m);
 		r.createAddRestaurantRequest(a);

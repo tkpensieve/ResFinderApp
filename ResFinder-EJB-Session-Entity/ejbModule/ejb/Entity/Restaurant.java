@@ -11,14 +11,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+@NamedQueries({
 @NamedQuery(
         name="Restaurant.fetchForLocationAndCuisine",
         query="SELECT r FROM Restaurant r INNER JOIN r.cuisines c WHERE c.id = :cuisineId and r.location.id = :locationId"
-        )
+        ),
+@NamedQuery(
+		name="Restaurant.fetchRes",
+		query="select r from Restaurant r where r.name=:name"
+		)
+})
 @Entity
 @Table(name = "RESTAURANT")
 public class Restaurant implements Serializable {
