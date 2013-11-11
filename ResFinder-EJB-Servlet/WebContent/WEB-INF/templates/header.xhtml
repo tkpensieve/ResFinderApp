@@ -26,6 +26,7 @@
        			</tr>
        		</table>
        		<h:panelGroup id="submitButtons" style="visibility:hidden">
+       			<h:selectBooleanCheckbox value="#{LoginDetails.businessUser}" /> Business account
        			<h:commandButton value="Login">
        				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd" onevent="onLoginAction" render="welcomeMessage loginLink"/>
        			</h:commandButton> or <h:button value="Register" outcome="registerView"/>
