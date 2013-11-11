@@ -39,7 +39,7 @@ function addRes()
 	</table>
 	
 	<h:commandButton  value="Submit" execute="a b">
-		<f:ajax listener="#{Manview.createRequest()}" execute="a b" render="result"/>
+		<f:ajax listener="#{Manview.createRequest()}" execute="a b c" render="result"/>
 	</h:commandButton>
 		<h:panelGroup id="result">
 		<h:outputText value="#{Manview.added}" /></h:panelGroup>

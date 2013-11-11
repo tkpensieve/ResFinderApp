@@ -82,6 +82,7 @@ public class Managerview {
 		a.setAddress(address);
 		a.setCuisine(cuisine);
 		a.setRestaurantName(restaurantName);
+		a.setStatus(status);
 		Manager m=ms.findByUserid("abc");
 		a.setManager(m);
 		r.createAddRestaurantRequest(a);

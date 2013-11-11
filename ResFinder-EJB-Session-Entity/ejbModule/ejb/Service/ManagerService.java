@@ -2,13 +2,16 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import ejb.Entity.Manager;
+import ejb.Entity.Restaurant;
 
 /**
  * Session Bean implementation class ManagerService
@@ -48,7 +51,11 @@ public class ManagerService {
 	}
 	public Manager findByUserid(String id)
 	{
-		return (Manager)em.createQuery("select m from Manager m where m.user.id="+id).getSingleResult();
+		//return (Manager)em.createQuery("select m from Manager m where m.user.id="+id).getSingleResult();
+		TypedQuery<Manager> query = em.createNamedQuery("Manager.fetchmanager", Manager.class);
+        query.setParameter("id", id);
+        
+		return  (Manager) query.getSingleResult();
 		
 		
 	}

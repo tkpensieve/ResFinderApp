@@ -5,13 +5,19 @@ import java.io.Serializable;
 
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+@NamedQuery(
+        name="Manager.fetchmanager",
+        query="SELECT m FROM Manager m where m.user.id=:id"
+        )
 
 @Entity
 @Table(name = "MANAGER")
