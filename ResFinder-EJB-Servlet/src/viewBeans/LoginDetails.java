@@ -62,4 +62,8 @@ public class LoginDetails {
 		}
 		this.setLoginMessage(message);
 	}
+	public void logout(){
+		this.setLoggedInUser(null);
+		this.setLoginMessage(null);
+	}
 }

@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<h:head xmlns:h="http://java.sun.com/jsf/html">
+<h:head xmlns:h="http://java.sun.com/jsf/html"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
 <div style="width:100%;font-size:36px;line-height:48px;background-color:#D00000 ;color:white">Restaurant Finder</div>
+<h:form id="LoginForm">
+			<h:panelGroup style="float:right"  id="welcomeMessage">
+        		<h:outputLabel value="#{LoginDetails.loginMessage}" rendered="#{LoginDetails.loginMessage != null }"/>
+        		<h:outputLabel value="Welcome, #{LoginDetails.loggedInUser.name}" rendered="#{LoginDetails.loggedInUser.name != null }"/>
+        		<br/>
+        		<h:commandLink action="#{LoginDetails.logout()}" rendered="#{LoginDetails.loggedInUser.name != null}">Logout</h:commandLink>
+			</h:panelGroup>
+			<h:panelGroup id="loginLink">
+				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login</h:commandLink>
+			</h:panelGroup>
+   	    	<table id="LoginTable" style="visibility:hidden">
+       			<tr>
+       				<td><h:outputLabel value="UserId: " /></td>
+       				<td><h:inputText id="usrId" value="#{LoginDetails.userId}" /></td>
+       			</tr>
+       			<tr>
+       				<td><h:outputLabel value="Password: " /></td>
+       				<td><h:inputSecret id="passwd" value="#{LoginDetails.password}" /></td>
+       			</tr>
+       		</table>
+       		<h:panelGroup id="submitButtons" style="visibility:hidden">
+       			<h:commandButton value="Login">
+       				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd" onevent="onLoginAction" render="welcomeMessage loginLink"/>
+       			</h:commandButton> or <h:button value="Register" outcome="registerView"/>
+       		</h:panelGroup>
+       	</h:form>
 <h:outputScript name="javascript/scripts.js" />
 </h:head>

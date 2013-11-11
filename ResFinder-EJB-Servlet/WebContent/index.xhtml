@@ -7,33 +7,6 @@
     xmlns:f="http://java.sun.com/jsf/core"> 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-		<h:form id="LoginForm">
-			<h:panelGroup style="float:right"  id="welcomeMessage">
-        		<h:outputLabel value="#{LoginDetails.loginMessage}" rendered="#{LoginDetails.loginMessage != null }"/>
-        		<h:outputLabel value="Welcome, #{LoginDetails.loggedInUser.name}" rendered="#{LoginDetails.loggedInUser.name != null }"/>
-			</h:panelGroup>
-			<h:panelGroup id="loginLink">
-				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login</h:commandLink>
-			</h:panelGroup>
-   	    	<table id="LoginTable" style="visibility:hidden">
-       			<tr>
-       				<td><h:outputLabel value="UserId: " /></td>
-       				<td><h:inputText id="usrId" value="#{LoginDetails.userId}" /></td>
-       			</tr>
-       			<tr>
-       				<td><h:outputLabel value="Password: " /></td>
-       				<td><h:inputSecret id="passwd" value="#{LoginDetails.password}" /></td>
-       			</tr>
-       		</table>
-       		<h:panelGroup id="submitButtons" style="visibility:hidden">
-       			<h:commandButton value="Login">
-       				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd" onevent="onLoginAction" render="welcomeMessage loginLink"/>
-       			</h:commandButton> or <h:button value="Register" outcome="registerView"/>
-       		</h:panelGroup>
-       		
-       	</h:form>
-	
-        <br/>
         <h:form id="SearchRestaurantForm"> 	
         	<h2><h:outputText value="Welcome! Search for a Restaurant"/></h2><br/>
         	<h3><h:outputLabel value="Location: " /></h3>
