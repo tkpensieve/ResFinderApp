@@ -39,7 +39,7 @@ public class Approvalview {
 	ArrayList<AddRestaurantRequest> alist;
 	public ArrayList<AddRestaurantRequest> getAlist() {
 		
-		return rs.getReviews();
+		return rs.getRequests();
 	}
 	public void setAlist(ArrayList<AddRestaurantRequest> alist) {
 		this.alist = alist;
@@ -48,6 +48,7 @@ public class Approvalview {
 	{
 		AddRestaurantRequest e;
 		e=rs.findById(id);
+		e.setStatus(RequestStatus.APPROVED);
 		Restaurant r=new Restaurant();
 		r.setAddress(e.getAddress());
 		String[] s=e.getCuisine().split(",");

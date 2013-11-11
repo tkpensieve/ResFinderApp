@@ -46,6 +46,12 @@ public class ManagerService {
 		Manager u=em.find(Manager.class,id);
 		return u;
 	}
+	public Manager findByUserid(String id)
+	{
+		return (Manager)em.createQuery("select m from Manager m where m.user.id="+id).getSingleResult();
+		
+		
+	}
 	public void delete(String id)
 	{
 		Manager u=em.find(Manager.class,id);

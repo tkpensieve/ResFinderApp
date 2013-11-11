@@ -18,8 +18,11 @@ public class Managerview {
 	@EJB
 	private RequestService r;
 	
-	String userid;
+	@EJB
+	private ManagerService ms;
 	
+	String userid;
+
 	String password;
 	
 	AddRestaurantRequest a;
@@ -51,15 +54,36 @@ public class Managerview {
 	String restaurantName;
 	String address;
 	String cuisine;
+	String added;
 	
+	public String getAdded() {
+		return added;
+	}
+
+	public void setAdded(String added) {
+		this.added = added;
+	}
+
 	RequestStatus status;
 	public void createRequest()
 	{
 		status=RequestStatus.PENDING;
 		a=new AddRestaurantRequest();
+		ArrayList<AddRestaurantRequest> arlist=r.findByName(restaurantName);
+		if(arlist.size()!=0)
+		{
+			added="couldn't add";
+			return;
+		}
+		added="added";
+		
+		
+		
 		a.setAddress(address);
 		a.setCuisine(cuisine);
 		a.setRestaurantName(restaurantName);
+		Manager m=ms.findByUserid("abc");
+		a.setManager(m);
 		r.createAddRestaurantRequest(a);
 		
 	}

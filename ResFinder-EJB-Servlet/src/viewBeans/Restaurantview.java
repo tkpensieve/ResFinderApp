@@ -58,13 +58,22 @@ public class Restaurantview {
 		});
 		return rev;
 	}
+	String manid;
 	
+	
+	public String getManid() {
+		return manid;
+	}
+	public void setManid(String manid) {
+		this.manid = manid;
+	}
 	@PostConstruct
 	public void fillRes()
 	{
 		res=restaurantService.findById(resId);
 		name=res.getName();
 		address=res.getAddress();
+		manid=res.getManager().getUser().getId();
 		rev=rs.getReviews(resId);
 	}
 	

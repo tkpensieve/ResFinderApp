@@ -59,7 +59,11 @@ public class RequestService {
 		
 		
 	}
-	public ArrayList<AddRestaurantRequest> getReviews()
+	public ArrayList<AddRestaurantRequest> findByName(String name)
+	{
+		return (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a where a.restaurantName="+name ).getResultList();
+	}
+	public ArrayList<AddRestaurantRequest> getRequests()
     {
     	ArrayList<AddRestaurantRequest> results = (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a").getResultList();
 		return results;

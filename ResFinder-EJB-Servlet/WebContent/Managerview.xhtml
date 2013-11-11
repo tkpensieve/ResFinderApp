@@ -20,25 +20,31 @@ function addRes()
 <h:body>
 
 <button onclick="addRes()" id="b">Add a Restaurant</button><br/>
-
+<h:form>
 <div id="a" style="visibility:hidden">
+
 	<h3>
 	Enter the details
 	</h3>
 	<table>
 	<tr><td> Restaurant name</td>
-	<td> <h:inputText value="#{Manview.restaurantName}" /></td>
+	<td> <h:inputText id="a" value="#{Manview.restaurantName}" /></td>
 	</tr>
 	<tr>
-	<td>Address</td><td><h:inputTextarea value="#{Manview.address}" /></td>
+	<td>Address</td><td><h:inputTextarea id="b" value="#{Manview.address}" /></td>
 	</tr>
 	<tr>
-	<td>Cuisine(comma separated if more than one)</td><td><h:inputTextarea value="#{Manview.cuisine}" /></td>
+	<td>Cuisine(comma separated if more than one)</td><td><h:inputTextarea id="c" value="#{Manview.cuisine}" /></td>
 	</tr>
 	</table>
 	
-	<h:commandButton action="#{Manview.createRequest()}" value="Submit" />
+	<h:commandButton  value="Submit" execute="a b">
+		<f:ajax listener="#{Manview.createRequest()}" execute="a b" render="result"/>
+	</h:commandButton>
+		<h:panelGroup id="result">
+		<h:outputText value="#{Manview.added}" /></h:panelGroup>
 	</div>
+	</h:form>
 	</h:body>
 </ui:define>
 	</ui:composition>
