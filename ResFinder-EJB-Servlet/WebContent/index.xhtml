@@ -4,34 +4,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
-   
-
- 
+    xmlns:f="http://java.sun.com/jsf/core"> 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-    <h:link style="position:fixed; left:80%;top:10%" outcome="adminview">Admin login</h:link>
-       <!-- <h:commandButton value="Login/Register"/>-->
-        <h:form id="LoginForm">
-        <table>
-        <tr>
-        	<td><h:outputLabel value="UserName: " /></td>
-        	<td><h:inputText value="#{SearchForm.loginDetails.userName}" /></td>
-        	</tr>
-        	<tr>
-        	<td><h:outputLabel value="Password: " /></td>
-        	<td><h:inputText value="#{SearchForm.loginDetails.password}" /></td>
-        	</tr>
-        	<tr>
-        	<h:panelGroup id="registerEvent" style="display:hidden">
-        		
-        	<td>	<h:outputLabel value="EmailId: " /></td>
-        	<td>	<h:inputText value="#{SearchForm.loginDetails.registerEmail}" /></td>
-        	</h:panelGroup>
-        	</tr>
-        	</table>
-        	<h:commandButton value="Login"/> or <h:commandButton value="Register"/>
-        </h:form>
+		<h:form id="LoginForm">
+			<h:panelGroup style="float:right"  id="welcomeMessage">
+        		<h:outputLabel value="#{LoginDetails.loginMessage}" rendered="#{LoginDetails.loginMessage != null }"/>
+        		<h:outputLabel value="Welcome, #{LoginDetails.loggedInUser.name}" rendered="#{LoginDetails.loggedInUser.name != null }"/>
+			</h:panelGroup>
+			<h:panelGroup id="loginLink">
+				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login</h:commandLink>
+			</h:panelGroup>
+   	    	<table id="LoginTable" style="visibility:hidden">
+       			<tr>
+       				<td><h:outputLabel value="UserId: " /></td>
+       				<td><h:inputText id="usrId" value="#{LoginDetails.userId}" /></td>
+       			</tr>
+       			<tr>
+       				<td><h:outputLabel value="Password: " /></td>
+       				<td><h:inputSecret id="passwd" value="#{LoginDetails.password}" /></td>
+       			</tr>
+       		</table>
+       		<h:panelGroup id="submitButtons" style="visibility:hidden">
+       			<h:commandButton value="Login">
+       				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd" onevent="onLoginAction" render="welcomeMessage loginLink"/>
+       			</h:commandButton> or <h:button value="Register" outcome="registerView"/>
+       		</h:panelGroup>
+       		
+       	</h:form>
+	
         <br/>
         <h:form id="SearchRestaurantForm"> 	
         	<h2><h:outputText value="Welcome! Search for a Restaurant"/></h2><br/>

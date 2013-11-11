@@ -3,7 +3,6 @@ import javax.persistence.*;
 
 import ejb.Entity.*;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import java.io.*;
@@ -24,16 +23,16 @@ public class UserService {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}	
 	}
+	
 	public User findById(String id)
 	{
 		User u=em.find(User.class,id);
 		return u;
 	}
+	
+	
 	public void delete(String id)
 	{
 		User u=em.find(User.class,id);
@@ -41,12 +40,10 @@ public class UserService {
 	}
 	public void update(User u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
 		em.getTransaction().commit();
-		
-		
+
 	}
 	
 	
