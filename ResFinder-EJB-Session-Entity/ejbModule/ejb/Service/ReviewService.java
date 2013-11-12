@@ -8,7 +8,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-import ejb.Entity.Cuisine;
 import ejb.Entity.Restaurant;
 import ejb.Entity.Review;
 
@@ -27,9 +26,8 @@ public class ReviewService {
    
     public String createReview(Review res) {
 		try{
-		em.persist(res);
-		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+			em.persist(res);
+			return "";
 		}
 		catch(Exception e)
 		{
@@ -71,12 +69,9 @@ public class ReviewService {
 	}
 	public void update(Review u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
 		em.getTransaction().commit();
-		
-		
 	}
 
 }

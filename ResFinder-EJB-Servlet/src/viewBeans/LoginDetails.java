@@ -82,11 +82,11 @@ public class LoginDetails {
 		if(businessUser){
 			Manager manager = managerService.findByUserid(userId);
 			user = manager.getUser();
-			this.setProfileLink("Managerview");
+			this.setProfileLink("managerView");
 		}
 		else {
 			user = userService.findById(userId);
-			this.setProfileLink("userhome");
+			this.setProfileLink("userHome");
 		}
 		String message = "";
 		if(user.getPassword().toLowerCase().equals(password.toLowerCase())){

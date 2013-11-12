@@ -8,22 +8,35 @@
 
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-   
-    <h:outputText value="Name:#{Resview.name}" />
+    <h:form id="addReview">
+    <h:outputText value="Name:#{Resview.res.name}" />
     <br/>
-    <h:outputText value=" Address:#{Resview.address}" />
+    <h:outputText value=" Address:#{Resview.res.address}" />
     <br/>
-    <h:outputText value="Manager id:#{Resview.manid}" />
+    <h:outputText value="Manager Name:#{Resview.manName}" />
+    <br/>
+    <h:outputText value="Cuisine: " />
     <ui:repeat value="#{Resview.cuis}" var="item">
-    <br/>
-    Cuisine:#{item.name}
-	</ui:repeat><br/><br/>
-	<span style="font-size:35px">Reviews</span>
-    <ui:repeat value="#{Resview.rev}" var="item">
-    <br/>
-    <span style="font-size:15px"><b>User #{item.user.id}</b> wrote on #{item.dateTimeAdded}</span><hr/><p style="font-family:Verdana; font-size:15px">#{item.content}</p><hr/>
-	</ui:repeat>
-   
+    	<h:outputText value="#{item.name} " />
+	</ui:repeat><br/>
+	<h:panelGroup id="addedReviews">
+		<span style="font-size:35px">Reviews</span>
+	    <ui:repeat value="#{Resview.rev}" var="item">
+	    	<br/>
+	    	<span style="font-size:15px"><b>User #{item.user.id}</b> wrote on #{item.dateTimeAdded}</span>
+		    <hr/>
+	    	<p style="font-family:Verdana; font-size:15px">#{item.content}</p><hr/>
+		</ui:repeat>
+	</h:panelGroup>
+   	<br/>
+   	<span style="font-size:15px">
+	Subject: <h:inputTextarea id="reviewContent" value = "#{Resview.newReviewContent}"/> 
+	</span> 
+	<br/>
+	<h:commandLink value = "Add">
+		<f:ajax listener="#{Resview.addReview(LoginDetails.loggedInUser)}" execute="reviewContent"/>
+	</h:commandLink>
+	</h:form>
     </ui:define>
 </ui:composition>
 </html>
