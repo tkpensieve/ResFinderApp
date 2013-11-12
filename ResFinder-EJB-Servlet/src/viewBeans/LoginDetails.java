@@ -21,6 +21,14 @@ public class LoginDetails {
 	String registerEmail;
 	String loginMessage;
 	User loggedInUser;
+	boolean loggedin=false;
+	
+	public boolean isLoggedin() {
+		return loggedin;
+	}
+	public void setLoggedin(boolean loggedin) {
+		this.loggedin = loggedin;
+	}
 	boolean businessUser;
 	public LoginDetails() {
 		businessUser=false;
@@ -76,14 +84,19 @@ public class LoginDetails {
 		if(user.getPassword().toLowerCase().equals(password.toLowerCase())){
 			message =  "";
 			this.setLoggedInUser(user);
+			loggedin=true;
 		}
 		else{
 			message = "Error - Wrong user name or password";
 		}
 		this.setLoginMessage(message);
 	}
-	public void logout(){
+	public String logout(){
 		this.setLoggedInUser(null);
 		this.setLoginMessage(null);
+		userId=null;
+		loggedin=false;
+		businessUser=false;
+		return "index?faces-redirect=true";
 	}
 }

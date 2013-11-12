@@ -5,18 +5,23 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
 <div style="width:100%;font-size:36px;line-height:48px;background-color:#D00000 ;color:white">Restaurant Finder</div>
+
 <h:form id="LoginForm">
+
 			<h:panelGroup style="float:right"  id="welcomeMessage">
+			<h:link style="float:right" value="home" outcome="index.jsf"/>
+			<br/>
         		<h:outputLabel value="#{LoginDetails.loginMessage} " rendered="#{LoginDetails.loginMessage != null }"/>
         		<h:outputLabel value="Welcome, #{LoginDetails.loggedInUser.name}" rendered="#{LoginDetails.loggedInUser.name != null }"/>
         		<br/>
-        		<h:commandLink action="#{LoginDetails.logout()}" rendered="#{LoginDetails.loggedInUser.name != null}">Logout</h:commandLink>
+        		<h:commandLink action="#{LoginDetails.logout()}" rendered="#{LoginDetails.loggedInUser.name != null}" >Logout</h:commandLink>
 			</h:panelGroup>
 			<h:panelGroup id="loginLink">
-				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login</h:commandLink>
+				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login&nbsp;&nbsp;&nbsp;</h:commandLink>
+				
 			</h:panelGroup>
 			<h:panelGroup id="proceed" >
-			<h:link value="Go to home page" outcome="userhome" style="float:right" rendered="#{(LoginDetails.loggedInUser.name != null) and not(LoginDetails.businessUser)}" >
+			<h:link value="Go to user home page" outcome="userhome" style="float:right" rendered="#{(LoginDetails.loggedInUser.name != null) and not(LoginDetails.businessUser)}" >
 				<f:param name="search" value="#{false}"/>
 			
 			</h:link> 

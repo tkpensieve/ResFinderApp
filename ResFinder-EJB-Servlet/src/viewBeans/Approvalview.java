@@ -59,7 +59,7 @@ public class Approvalview {
 	{
 		AddRestaurantRequest e;
 		e=rs.findById(id);
-		e.setStatus(RequestStatus.APPROVED);
+		
 		Restaurant r=new Restaurant();
 		r.setAddress(e.getAddress());
 		String[] s=e.getCuisine().split(",");
@@ -105,6 +105,7 @@ public class Approvalview {
 			return;
 		}
 		e.setStatus(RequestStatus.APPROVED);
+		rs.createAddRestaurantRequest(e);
 		
 		
 		

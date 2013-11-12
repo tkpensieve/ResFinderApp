@@ -19,7 +19,7 @@ function addRes()
 </h:outputScript>
 
 <h:body>
-<h:panelGroup rendered="#{Manview.hasRes}">
+<h:panelGroup rendered="#{(Manview.hasRes) and LoginDetails.businessUser and LoginDetails.loggedin}">
 <h:outputText value="Name:#{Manview.resname}" />
     <br/>
     <h:outputText value=" Address:#{Manview.resaddress}" />
@@ -36,7 +36,8 @@ function addRes()
 	</ui:repeat>  
 </h:panelGroup>
 
-<h:panelGroup rendered="#{not(Manview.hasRes)}">
+<h:panelGroup rendered="#{not(Manview.hasRes) and (LoginDetails.loggedin)}">
+
 <button onclick="addRes()" id="b">Add a Restaurant</button><br/>
 <h:form >
 
