@@ -2,7 +2,6 @@ package viewBeans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import ejb.Entity.Manager;
 import ejb.Entity.User;
 import ejb.Service.ManagerService;
@@ -22,6 +21,7 @@ public class LoginDetails {
 	String loginMessage;
 	User loggedInUser;
 	boolean loggedin=false;
+	String profileLink;
 	
 	public boolean isLoggedin() {
 		return loggedin;
@@ -71,14 +71,22 @@ public class LoginDetails {
 	public void setBusinessUser(boolean businessUser) {
 		this.businessUser = businessUser;
 	}
+	public String getProfileLink() {
+		return profileLink;
+	}
+	public void setProfileLink(String profileLink) {
+		this.profileLink = profileLink;
+	}
 	public void login()	{
 		User user = null;
 		if(businessUser){
 			Manager manager = managerService.findByUserid(userId);
 			user = manager.getUser();
+			this.setProfileLink("Managerview");
 		}
 		else {
 			user = userService.findById(userId);
+			this.setProfileLink("userhome");
 		}
 		String message = "";
 		if(user.getPassword().toLowerCase().equals(password.toLowerCase())){
@@ -96,7 +104,10 @@ public class LoginDetails {
 		this.setLoginMessage(null);
 		userId=null;
 		loggedin=false;
+		loggedInUser = null;
+		loginMessage = null;
 		businessUser=false;
+		profileLink = "";
 		return "index?faces-redirect=true";
 	}
 }
