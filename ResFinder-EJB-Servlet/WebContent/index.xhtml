@@ -29,6 +29,8 @@
 				<h:column>
 					<h:link value="#{result.name}" outcome="restaurantView">
 						<f:param name="id" value="#{result.id}" />
+						<f:param name="search" value="#{true}" />
+						
 					</h:link>
 					<br/>
 					<h:outputText value="#{result.rating}*"></h:outputText>

@@ -22,7 +22,9 @@ public class LoginDetails {
 	String loginMessage;
 	User loggedInUser;
 	boolean businessUser;
-	
+	public LoginDetails() {
+		businessUser=false;
+	}
 	public String getUserId() {
 		return userId;
 	}

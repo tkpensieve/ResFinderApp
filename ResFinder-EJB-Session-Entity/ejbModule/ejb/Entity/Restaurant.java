@@ -24,7 +24,13 @@ import javax.persistence.Table;
 @NamedQuery(
 		name="Restaurant.fetchRes",
 		query="select r from Restaurant r where r.name=:name"
-		)
+		),
+@NamedQuery(
+		name="Restaurant.fetchByMan",
+		query="select r from Restaurant r where r.manager.user.id=:id"
+	)
+		
+		
 })
 @Entity
 @Table(name = "RESTAURANT")

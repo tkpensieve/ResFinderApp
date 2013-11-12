@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
     <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 <ui:define name="content">
 <h:outputScript>
@@ -18,9 +19,27 @@ function addRes()
 </h:outputScript>
 
 <h:body>
+<h:panelGroup rendered="#{Manview.hasRes}">
+<h:outputText value="Name:#{Manview.resname}" />
+    <br/>
+    <h:outputText value=" Address:#{Manview.resaddress}" />
+    <br/>
+    
+    <ui:repeat value="#{Manview.rescuislist}" var="item">
+    <br/>
+    Cuisine:#{item.name}
+	</ui:repeat><br/><br/>
+	<span style="font-size:35px">Reviews</span>
+    <ui:repeat value="#{Manview.revlist}" var="item">
+    <br/>
+    <span style="font-size:15px">Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category} Date added:#{item.dateTimeAdded}</span><hr/><p style="color:green">#{item.content}</p><hr/>
+	</ui:repeat>  
+</h:panelGroup>
 
+<h:panelGroup rendered="#{not(Manview.hasRes)}">
 <button onclick="addRes()" id="b">Add a Restaurant</button><br/>
-<h:form>
+<h:form >
+
 <div id="a" style="visibility:hidden">
 
 	<h3>
@@ -38,15 +57,17 @@ function addRes()
 	</tr>
 	<tr>
 	<td>Location </td><td><h:inputText id="d" value="#{Manview.location}" /></td></tr>
+	
 	</table>
 	
 	<h:commandButton  value="Submit" >
-		<f:ajax listener="#{Manview.createRequest()}" execute="a b c d" render="result"/>
+		<f:ajax listener="#{Manview.createRequest(LoginDetails.userId)}" execute="a b c d" render="result"/>
 	</h:commandButton>
 		<h:panelGroup id="result">
 		<h:outputText value="#{Manview.added}" /></h:panelGroup>
 	</div>
 	</h:form>
+	</h:panelGroup>
 	</h:body>
 </ui:define>
 	</ui:composition>

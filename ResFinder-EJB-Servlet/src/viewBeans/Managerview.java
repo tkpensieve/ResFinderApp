@@ -24,7 +24,34 @@ public class Managerview {
 	@EJB
 	private RestaurantService resservice;
 	
+	@EJB
+	private ReviewService revservice;
+	
+	@ManagedProperty(value="#{LoginDetails}")
+	LoginDetails l;
 	String userid;
+	boolean hasRes;
+	public LoginDetails getL() {
+		return l;
+	}
+
+	public void setL(LoginDetails l) {
+		this.l = l;
+	}
+	
+	public boolean isHasRes() {
+		
+		ArrayList<Restaurant> rlist=(ArrayList<Restaurant>)resservice.fetchByMan(l.getUserId());
+		if(rlist.size()==0)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	public void setHasRes(boolean hasRes) {
+		this.hasRes = hasRes;
+	}
 
 	String password;
 	
@@ -75,9 +102,82 @@ public class Managerview {
 	public void setAdded(String added) {
 		this.added = added;
 	}
+	String resaddress;
+	public String getUserid() {
+		return userid;
+		
+	}
 
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getResaddress() {
+		return resaddress;
+	}
+
+	public void setResaddress(String resaddress) {
+		this.resaddress = resaddress;
+	}
+
+	public String getResname() {
+		return resname;
+	}
+
+	public void setResname(String resname) {
+		this.resname = resname;
+	}
+
+	public List<Cuisine> getRescuislist() {
+		return rescuislist;
+	}
+
+	public void setRescuislist(List<Cuisine> rescuislist) {
+		this.rescuislist = rescuislist;
+	}
+
+	public ArrayList<Review> getRevlist() {
+		return revlist;
+	}
+
+	public void setRevlist(ArrayList<Review> revlist) {
+		this.revlist = revlist;
+	}
+
+	public RequestStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(RequestStatus status) {
+		this.status = status;
+	}
+
+	String resname;
+	List<Cuisine> rescuislist;
+	ArrayList<Review> revlist;
+	int rating;
 	RequestStatus status;
-	public void createRequest()
+	@PostConstruct
+	public void fillman()
+	{
+		String id=l.getUserId();
+		ArrayList<Restaurant> res=(ArrayList<Restaurant>)resservice.fetchByMan(id);
+		if(res.size()==0)
+		{
+			return;
+		}
+		Restaurant r=res.get(0);
+		resaddress=r.getAddress();
+		resname=r.getName();
+		rescuislist=r.getCuisines();
+		revlist= revservice.getReviews(r.getId());
+		rating=r.getRating();
+		
+		
+		
+	}
+	
+	public void createRequest(String userid)
 	{
 		status=RequestStatus.PENDING;
 		a=new AddRestaurantRequest();
@@ -101,7 +201,7 @@ public class Managerview {
 		a.setRestaurantName(restaurantName);
 		a.setStatus(status);
 		a.setLocation(location);
-		Manager m=ms.findByUserid("abc");
+		Manager m=ms.findByUserid(userid);
 		a.setManager(m);
 		r.createAddRestaurantRequest(a);
 		

@@ -3,6 +3,7 @@ package ejb.Service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -78,6 +79,15 @@ public class RestaurantService {
         
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
+		
+	}
+	public List<Restaurant> fetchByMan(String id)
+	{
+		TypedQuery<Restaurant> query=em.createNamedQuery("Restaurant.fetchByMan",Restaurant.class);
+		query.setParameter("id", id);
+		return (List<Restaurant>) query.getResultList();
+		 
+	
 		
 	}
 

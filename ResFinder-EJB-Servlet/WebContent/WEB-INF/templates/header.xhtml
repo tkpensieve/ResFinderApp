@@ -7,7 +7,7 @@
 <div style="width:100%;font-size:36px;line-height:48px;background-color:#D00000 ;color:white">Restaurant Finder</div>
 <h:form id="LoginForm">
 			<h:panelGroup style="float:right"  id="welcomeMessage">
-        		<h:outputLabel value="#{LoginDetails.loginMessage}" rendered="#{LoginDetails.loginMessage != null }"/>
+        		<h:outputLabel value="#{LoginDetails.loginMessage} " rendered="#{LoginDetails.loginMessage != null }"/>
         		<h:outputLabel value="Welcome, #{LoginDetails.loggedInUser.name}" rendered="#{LoginDetails.loggedInUser.name != null }"/>
         		<br/>
         		<h:commandLink action="#{LoginDetails.logout()}" rendered="#{LoginDetails.loggedInUser.name != null}">Logout</h:commandLink>
@@ -15,7 +15,20 @@
 			<h:panelGroup id="loginLink">
 				<h:commandLink style="float:right" action="#{LoginDetails.login()}" onclick="onLoginLink(); return false;" rendered="#{LoginDetails.loggedInUser.name == null}">Login</h:commandLink>
 			</h:panelGroup>
-   	    	<table id="LoginTable" style="visibility:hidden">
+			<h:panelGroup id="proceed" >
+			<h:link value="Go to home page" outcome="userhome" style="float:right" rendered="#{(LoginDetails.loggedInUser.name != null) and not(LoginDetails.businessUser)}" >
+				<f:param name="search" value="#{false}"/>
+			
+			</h:link> 
+			
+			</h:panelGroup>
+			
+			<h:panelGroup id="manager" >
+				<h:link value="Go to home page" outcome="Managerview" style="float:right" rendered="#{(LoginDetails.loggedInUser.name != null) and (LoginDetails.businessUser)}" >
+				<f:param name="search" value="#{false}"/>
+				</h:link>
+			</h:panelGroup>
+   	    	<table id="LoginTable" style="display:none">
        			<tr>
        				<td><h:outputLabel value="UserId: " /></td>
        				<td><h:inputText id="usrId" value="#{LoginDetails.userId}" /></td>
@@ -25,10 +38,10 @@
        				<td><h:inputSecret id="passwd" value="#{LoginDetails.password}" /></td>
        			</tr>
        		</table>
-       		<h:panelGroup id="submitButtons" style="visibility:hidden">
-       			<h:selectBooleanCheckbox value="#{LoginDetails.businessUser}" /> Business account
+       		<h:panelGroup id="submitButtons" style="display:none">
+       			<h:selectBooleanCheckbox id="a" value="#{LoginDetails.businessUser}" /> Business account
        			<h:commandButton value="Login">
-       				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd" onevent="onLoginAction" render="welcomeMessage loginLink"/>
+       				<f:ajax listener="#{LoginDetails.login()}" execute="usrId passwd a" onevent="onLoginAction" render="welcomeMessage loginLink proceed manager"/>
        			</h:commandButton> or <h:button value="Register" outcome="registerView"/>
        		</h:panelGroup>
        	</h:form>
