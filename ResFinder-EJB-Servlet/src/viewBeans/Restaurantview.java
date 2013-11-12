@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import ejb.Entity.*;
 import ejb.Service.*;
@@ -152,12 +153,15 @@ public class Restaurantview {
 	}
 
 	public void addReview(User user){
+		Map<String,String> params = 
+				FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		int restId = Integer.parseInt(params.get("resId"));
 		Review newReview = new Review();
 		newReview.setContent(newReviewContent);
 		newReview.setDateTimeAdded(new Date());
 		newReview.setUser(user);
 		Restaurant rest = new Restaurant();
-		rest.setId(1);
+		rest.setId(restId);
 		newReview.setRestaurant(rest);
         rs.createReview(newReview);
 	}

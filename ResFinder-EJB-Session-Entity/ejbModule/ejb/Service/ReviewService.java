@@ -34,10 +34,7 @@ public class ReviewService {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}		
 	}
     public ArrayList<Review>findByUser(String id)
     {

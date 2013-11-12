@@ -34,6 +34,7 @@
 	</span> 
 	<br/>
 	<h:commandLink value = "Add">
+		<f:param name="resId" value="#{param.id}" />
 		<f:ajax listener="#{Resview.addReview(LoginDetails.loggedInUser)}" execute="reviewContent"/>
 	</h:commandLink>
 	</h:form>
