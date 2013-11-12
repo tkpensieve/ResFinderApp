@@ -32,7 +32,7 @@ function addRes()
 	<span style="font-size:35px">Reviews</span>
     <ui:repeat value="#{Manview.revlist}" var="item">
     <br/>
-    <span style="font-size:15px">Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category} Date added:#{item.dateTimeAdded}</span><hr/><p style="color:green">#{item.content}</p><hr/>
+    <span style="font-size:15px"><b>User #{item.user.id}</b> wrote on #{item.dateTimeAdded}</span><hr/><p style="font-family:Verdana; font-size:15px">#{item.content}</p><hr/>
 	</ui:repeat>  
 </h:panelGroup>
 

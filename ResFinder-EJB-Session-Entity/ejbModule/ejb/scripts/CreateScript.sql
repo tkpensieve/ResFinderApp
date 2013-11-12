@@ -68,8 +68,8 @@ RestaurantId INT NOT NULL,
 UserId VARCHAR(25) NOT NULL,
 DateTimeAdded TIMESTAMP,
 Content VARCHAR(255),
-Upvotes INT,
-DownVotes INT,
+/*Upvotes INT,
+DownVotes INT,*/
 Category varchar(10),
 FOREIGN KEY (UserId) REFERENCES User(Id),
 FOREIGN KEY (RestaurantId) REFERENCES Restaurant(Id)

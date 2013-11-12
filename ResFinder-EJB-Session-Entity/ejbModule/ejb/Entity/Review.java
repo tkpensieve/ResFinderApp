@@ -38,8 +38,8 @@ public class Review implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="RestaurantId", nullable=false)
 	Restaurant restaurant;
-	int upVotes;
-	int downVotes;
+	//int upVotes;
+	//int downVotes;
 	String content;
 	@Enumerated(EnumType.STRING)
 	ReviewCategory category;
@@ -63,7 +63,7 @@ public class Review implements Serializable{
 	}
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
-	}
+	}/*
 	public int getUpVotes() {
 		return upVotes;
 	}
@@ -75,7 +75,7 @@ public class Review implements Serializable{
 	}
 	public void setDownVotes(int downVotes) {
 		this.downVotes = downVotes;
-	}
+	}*/
 	public String getContent() {
 		return content;
 	}
