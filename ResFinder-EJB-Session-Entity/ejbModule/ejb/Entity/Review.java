@@ -10,8 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
+@NamedQueries({
+@NamedQuery(
+		name="Review.fetchRes",
+		query="select res from Review rev inner join rev.restaurant res where rev.user.id=:id"
+		),
+@NamedQuery(
+		name="Review.fetchRev",
+		query="select rev from Review rev where rev.user.id=:id")
+})
 @Entity
 @Table(name = "REVIEW")
 public class Review implements Serializable{

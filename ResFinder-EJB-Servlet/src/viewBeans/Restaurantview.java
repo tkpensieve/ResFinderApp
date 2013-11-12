@@ -24,7 +24,7 @@ public class Restaurantview {
 	@ManagedProperty(value="#{param['id']}")
 	int resId;
 	@ManagedProperty(value="#{param['search']}")
-	boolean search;
+	boolean search=false;
 	
 	public boolean isSearch() {
 		return search;
@@ -47,6 +47,10 @@ public class Restaurantview {
 	}
 	public ArrayList<Review> getRev()
 	{
+		if(!search)
+		{
+			return (new  ArrayList<Review>());
+		}
 		Collections.sort(rev, new Comparator<Review>(){
 			
 			
@@ -141,6 +145,11 @@ public class Restaurantview {
 	
 	public List<Cuisine> getcuis()
 	{
-		return res.getCuisines();
+		if(search)
+		{
+			return res.getCuisines();
+		}
+		else
+			return(new ArrayList<Cuisine>());
 	}
 }

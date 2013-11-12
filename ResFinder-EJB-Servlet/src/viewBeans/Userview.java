@@ -18,11 +18,38 @@ import ejb.Service.*;
 
 public class Userview {
 	
+	public LoginDetails getL() {
+		return l;
+	}
+	public void setL(LoginDetails l) {
+		this.l = l;
+	}
 	@EJB
 	RestaurantService rs;
 	
 	@EJB
 	ReviewService revs;
+	@ManagedProperty(value="#{LoginDetails}")
+	LoginDetails l;
+	
+	List<Review> revlist;
+	
+	public List<Review> getRevlist() {
+		revlist=revs.findByUser(l.getUserId());
+		for(Review r:revlist)
+		{
+			r.setRestaurant(revs.fetchRes(l.getUserId()));
+		}
+		return revlist;
+	}
+	public void setRevlist(List<Review> revlist) {
+		this.revlist = revlist;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

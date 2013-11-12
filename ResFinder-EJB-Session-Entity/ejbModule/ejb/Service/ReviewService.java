@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import ejb.Entity.Cuisine;
+import ejb.Entity.Restaurant;
 import ejb.Entity.Review;
 
 /**
@@ -40,6 +41,19 @@ public class ReviewService {
 		
 			
 	}
+    public ArrayList<Review>findByUser(String id)
+    {
+    	TypedQuery<Review> query= em.createNamedQuery("Review.fetchRev",Review.class);
+    	query.setParameter("id", id);
+    	return (ArrayList<Review>) query.getResultList();
+    	
+    }
+    public Restaurant fetchRes(String id)
+    {
+    	TypedQuery<Restaurant> query= em.createNamedQuery("Review.fetchRes",Restaurant.class);
+    	query.setParameter("id", id);
+    	return (Restaurant) query.getSingleResult();
+    }
     public ArrayList<Review> getReviews(int id)
     {
     	ArrayList<Review> results = (ArrayList<Review>) em.createQuery("SELECT c FROM Review c where c.restaurant.id="+id).getResultList();

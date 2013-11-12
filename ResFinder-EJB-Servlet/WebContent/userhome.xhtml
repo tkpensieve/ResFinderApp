@@ -5,18 +5,15 @@
 
     <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
     <ui:define name="content">
-	  <h:outputText value="Name:#{Manview.resname}" />
-    <br/>
-    <h:outputText value=" Address:#{Manview.resaddress}" />
-    <br/>
+	 
+    <ui:repeat value="#{Userview.revlist}" var="item">
     
-    <ui:repeat value="#{Manview.rescuislist}" var="item">
     <br/>
-    Cuisine:#{item.name}
-	</ui:repeat><br/><br/>
-	<span style="font-size:35px">Reviews</span>
-    <ui:repeat value="#{Manview.revlist}" var="item">
-    <br/>
+    <h3><h:link outcome="restaurantView" value="#{item.restaurant.name}">
+    
+    <f:param name="id" value="#{item.restaurant.id}"/>
+    <f:param name="search" value="#{true}"/>
+    </h:link></h3>
     <span style="font-size:15px">Upvotes:#{item.upVotes} DownVotes:#{item.downVotes} Category:#{item.category} Date added:#{item.dateTimeAdded}</span><hr/><p style="color:green">#{item.content}</p><hr/>
 	</ui:repeat>  
 
