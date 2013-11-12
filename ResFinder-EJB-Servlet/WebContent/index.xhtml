@@ -21,7 +21,8 @@
             	<f:ajax listener="#{SearchForm.filter()}" execute="filteredLocation filteredCuisine" render="resultsDiv" />
             </h:commandButton>
             
-            <h:panelGroup id="resultsDiv">   	      
+            <h:panelGroup id="resultsDiv">   
+            <h:outputLabel rendered="#{SearchForm.filteredRestaurants.size() == 0 and SearchForm.searchDone}"> No results</h:outputLabel>	      
 	        <h:dataTable id="searchResults" value="#{SearchForm.filteredRestaurants}" var="result">
 	        	<h:column>
 	        		<h:outputText value="#{SearchForm.filteredRestaurants.indexOf(result) + 1})"></h:outputText>

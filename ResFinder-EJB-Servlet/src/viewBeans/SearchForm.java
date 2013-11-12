@@ -27,6 +27,7 @@ public class SearchForm {
 	
 	int selectedLocationId;
 	int selectedCuisineId;
+	boolean searchDone = false;
 	Map<String, Object> allLocations = new HashMap<String, Object>();
 	Map<String, Object> allCuisines = new HashMap<String, Object>();
 	ArrayList<Restaurant> filteredRestaurants;
@@ -100,7 +101,16 @@ public class SearchForm {
 		this.filteredRestaurants = filteredRestaurants;
 	}
 	
+	public boolean isSearchDone() {
+		return searchDone;
+	}
+
+	public void setSearchDone(boolean searchDone) {
+		this.searchDone = searchDone;
+	}
+
 	public void filter(){
+		searchDone = true;
 		ArrayList<Restaurant> filter = restaurantService.filter(selectedLocationId, selectedCuisineId);
 		this.setFilteredRestaurants(filter);
 	}
