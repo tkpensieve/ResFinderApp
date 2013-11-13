@@ -2,6 +2,7 @@ package viewBeans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 import ejb.Entity.User;
 import ejb.Service.UserService;
 
@@ -42,7 +43,7 @@ public class NewUserDetails {
 		this.userName = userName;
 	}
 
-	public void register()	{
+	public String register()	{
 		User user = new User();
 		user.setName(userName);
 		user.setEmailId(registerEmail);
@@ -50,5 +51,6 @@ public class NewUserDetails {
 		user.setPassword(password);
 		user.setRank(2);
 		userService.createUser(user);
+		return "index?faces-redirect=true";
 	}
 }
