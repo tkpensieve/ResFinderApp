@@ -1,5 +1,5 @@
 package viewBeans;
-
+/*search form view bean*/
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

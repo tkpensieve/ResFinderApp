@@ -6,7 +6,8 @@ import javax.faces.bean.RequestScoped;
 
 import ejb.Entity.*;
 import ejb.Service.*;
-
+/*TODO implementation. extra feature. for now we thought it is a better idea to manually add managers based on requests, as spam managers can create
+ * spam restaurants */
 @ManagedBean(name="NewMan")
 @RequestScoped
 public class NewMan {

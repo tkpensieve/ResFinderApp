@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-@NamedQuery(
+@NamedQuery(						//named query for getting cuisine object based on cuisine name
         name="Cuisine.fetchCuisine",
         query="SELECT c FROM Cuisine c where c.name =:cuis"
         )

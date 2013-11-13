@@ -6,7 +6,7 @@ import ejb.Entity.Manager;
 import ejb.Entity.User;
 import ejb.Service.ManagerService;
 import ejb.Service.UserService;
-
+/*session bean for log in*/
 @ManagedBean(name="LoginDetails")
 @SessionScoped
 public class LoginDetails {

@@ -41,7 +41,7 @@ public class Managerview {
 	
 	public boolean isHasRes() {
 		
-		ArrayList<Restaurant> rlist=(ArrayList<Restaurant>)resservice.fetchByMan(l.getUserId());
+		ArrayList<Restaurant> rlist=(ArrayList<Restaurant>)resservice.fetchByMan(l.getUserId());		//checks if the manager a=has a restaurant. display on his page differs if he does.
 		if(rlist.size()==0)
 		{
 			return false;
@@ -158,7 +158,7 @@ public class Managerview {
 	double rating;
 	RequestStatus status;
 	@PostConstruct
-	public void fillman()
+	public void fillman()			//fills the manager view bean with details given the logged in user id. post construct so that the data is available as soon as the page loads.
 	{
 		String id=l.getUserId();
 		ArrayList<Restaurant> res=(ArrayList<Restaurant>)resservice.fetchByMan(id);
@@ -179,17 +179,17 @@ public class Managerview {
 	
 	public void createRequest(String userid)
 	{
-		status=RequestStatus.PENDING;
+		status=RequestStatus.PENDING;				//intitial state of a request must always be PENDING
 		a=new AddRestaurantRequest();
 		ArrayList<AddRestaurantRequest> arlist=r.findByName(restaurantName);
-		if(arlist.size()!=0)
+		if(arlist.size()!=0)				//if the request to add this restaurant has already been created, we won't allow addition.
 		{
 			added="couldn't add";
 			return;
 		}
 		
 		ArrayList<Restaurant> rlist=resservice.fetchByName(restaurantName);
-		if(rlist.size()!=0)
+		if(rlist.size()!=0)					//if the restaurant already exists in our database we wont allow a manager to create a new request to add it
 		{
 			added="couldn't add";
 			return;

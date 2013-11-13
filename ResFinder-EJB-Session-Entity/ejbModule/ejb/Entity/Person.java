@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-abstract class Person  implements Serializable {
+abstract class Person  implements Serializable {		//Person super class for user
 	
 	private static final long serialVersionUID = 1L;
 	@Id

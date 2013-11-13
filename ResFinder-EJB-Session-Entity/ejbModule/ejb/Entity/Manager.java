@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-@NamedQuery(
+@NamedQuery(				//fetch manager details based on user id 
         name="Manager.fetchmanager",
         query="SELECT m FROM Manager m where m.user.id=:id"
         )

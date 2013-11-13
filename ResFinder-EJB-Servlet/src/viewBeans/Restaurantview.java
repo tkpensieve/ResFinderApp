@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 
 import ejb.Entity.*;
 import ejb.Service.*;
-
+/*restaurant view bean*/
 @ManagedBean(name="Resview")
 @RequestScoped
 public class Restaurantview {
@@ -21,7 +21,7 @@ public class Restaurantview {
 	private RestaurantService restaurantService;
 	@EJB
 	private ReviewService rs;
-	@ManagedProperty(value="#{param['id']}")
+	@ManagedProperty(value="#{param['id']}")//get parameter
 	int resId;
 	@ManagedProperty(value="#{param['search']}")
 	boolean search=false;
@@ -48,7 +48,7 @@ public class Restaurantview {
 	}
 
 	@PostConstruct
-	public void fillRes()
+	public void fillRes()			//fill bean on load
 	{
 		if(search)
 		{
@@ -129,7 +129,7 @@ public class Restaurantview {
 		this.newReviewContent = newReviewContent;
 	}
 	
-	public List<Cuisine> getcuis()
+	public List<Cuisine> getcuis()	//same view bean is being used in 2 contexts but for the same bean. if it is the result of a search,we get the appropriate details. else we would be displaying the details of a restaurant managed by a manager.
 	{
 		if(search)
 		{
@@ -146,7 +146,7 @@ public class Restaurantview {
 		{
 			return (new  ArrayList<Review>());
 		}
-		Collections.sort(rev, new Comparator<Review>(){
+		Collections.sort(rev, new Comparator<Review>(){				//sort the list of reviews on timestamp
 			public int compare(Review x, Review y) 
 			{
 			    int startComparison = compare(x.getDateTimeAdded(), y.getDateTimeAdded());
@@ -162,7 +162,7 @@ public class Restaurantview {
 		return rev;
 	}
 	
-	public String addReview(User user){
+	public String addReview(User user){				//add a review
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		
 		int restId = Integer.parseInt(params.get("resId"));
@@ -185,7 +185,7 @@ public class Restaurantview {
 		newReview.setRating(newrating);
         rs.createReview(newReview);    
         ArrayList<Double> ratingList;
-        ratingList=rs.getRatings(restId);
+        ratingList=rs.getRatings(restId);			//update the rating
         
         double sum=0;
         for(Double i :ratingList)
@@ -199,15 +199,14 @@ public class Restaurantview {
         }
         System.out.println(sum);
         DecimalFormat df=new DecimalFormat("#.##");
-		double sum1=Double.parseDouble(df.format(sum));
+		double sum1=Double.parseDouble(df.format(sum));				//format the double to 2 decimal places
         rest=restaurantService.findById(restId);
-        System.out.println(restaurantService.updateRating(sum1, rest));
+        restaurantService.updateRating(sum1, rest);
         
         
         //System.out.println(restaurantService.createRestaurant(rest));
         rest=restaurantService.findById(restId);
-        System.out.println(rest.getName());
-        System.out.println(rest.getRating());
+        
     	String url = "restaurantView?faces-redirect=true&search=true&id="+restId;
     	return url;
 	}

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-@NamedQuery(
+@NamedQuery(							//fetch location based on location name
 		name="Location.fetchloc",
 		query="select l from Location l where l.name=:name"
 		)

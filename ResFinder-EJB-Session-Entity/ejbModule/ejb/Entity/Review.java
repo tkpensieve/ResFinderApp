@@ -15,17 +15,17 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 @NamedQueries({
 @NamedQuery(
-		name="Review.fetchRes",
+		name="Review.fetchRes",			//query to fetch restaurant based on user id of user who wrote the review and restaurant id
 		query="select res from Review rev inner join rev.restaurant res where rev.user.id=:id"
 		),
 @NamedQuery(
-		name="Review.fetchRev",
+		name="Review.fetchRev",			//fetch review based on user id
 		query="select rev from Review rev where rev.user.id=:id"),
 @NamedQuery(
-				name="Review.fetchRevRes",
+				name="Review.fetchRevRes",	//fetch review based on user and restaurant id
 				query="select rev from Review rev where rev.user.id=:id and rev.restaurant.id=:resid"),
 @NamedQuery(
-		name="Review.getRatings",
+		name="Review.getRatings",			//fetch ratings based on user and restaurant id
 		query="select rev.rating from Review rev inner join rev.restaurant res where rev.restaurant.id=:id")
 })
 @Entity

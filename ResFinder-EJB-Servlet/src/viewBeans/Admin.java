@@ -1,7 +1,8 @@
 package viewBeans;
-
+/*View bean for administrator view*/
 
 import java.util.*;
+
 
 
 import javax.annotation.PostConstruct;
@@ -44,7 +45,7 @@ public class Admin {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
-	public String validate()
+	public String validate()			//bare bones validation
 	{
 		if(userName.equals("admin")&&password.equals("admin"))
 		{

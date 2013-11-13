@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-@NamedQuery(
+@NamedQuery(								//named query for fetching requests based on name of restaurant
         name="AddRestaurantRequest.fetchrequest",
         query="SELECT a FROM AddRestaurantRequest a where a.restaurantName=:name"
         )

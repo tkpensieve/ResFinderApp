@@ -33,7 +33,7 @@
 		</ui:repeat>
 	</h:panelGroup>
    	<br/>
-   	<h:panelGroup rendered="#{LoginDetails.loggedin}">
+   	<h:panelGroup rendered="#{(LoginDetails.loggedin) and not(LoginDetails.businessUser)}">
    	<span style="font-size:15px">
 	Subject: <h:inputTextarea id="reviewContent" value = "#{Resview.newReviewContent}"/> 
 	Rating:<h:inputTextarea id="rating" value = "#{Resview.newrating}"/>

@@ -17,15 +17,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @NamedQueries({
-@NamedQuery(
+@NamedQuery(			//named query for fetching restaurant based on cuisine and location
         name="Restaurant.fetchForLocationAndCuisine",
         query="SELECT r FROM Restaurant r INNER JOIN r.cuisines c WHERE c.id = :cuisineId and r.location.id = :locationId"
         ),
-@NamedQuery(
+@NamedQuery(			//fetch restaurant based on name
 		name="Restaurant.fetchRes",
 		query="select r from Restaurant r where r.name=:name"
 		),
-@NamedQuery(
+@NamedQuery(				//fetch restaurant based on manager's userid
 		name="Restaurant.fetchByMan",
 		query="select r from Restaurant r where r.manager.user.id=:id"
 	)
@@ -46,7 +46,7 @@ public class Restaurant implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "MANAGERID")
 	Manager manager;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)		//fetch type eager for cuisines
 	@JoinTable(name="RESTAURANTCUISINEMAP",
                joinColumns=@JoinColumn(name="RESTAURANTID", referencedColumnName="ID"),
                inverseJoinColumns=@JoinColumn(name="CUISINEID", referencedColumnName="ID"))
@@ -57,7 +57,7 @@ public class Restaurant implements Serializable {
 	@JoinColumn(name = "LOCATIONID")
 	Location location;
 	double rating;
-	@OneToMany(orphanRemoval=true,fetch = FetchType.LAZY)
+	@OneToMany(orphanRemoval=true,fetch = FetchType.LAZY)	//reviews are large so fetch type is lazy
 	@JoinColumn(name="RESTAURANTID") 
 //	@OneToMany(cascade=CascadeType.ALL)
 	List<Review> reviews;

@@ -1,5 +1,5 @@
 package viewBeans;
-
+/*view bean for user*/
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +34,7 @@ public class Userview {
 	
 	List<Review> revlist;
 	
-	public List<Review> getRevlist() {
+	public List<Review> getRevlist() {		//get users reviews and restaurant details for that review
 		revlist=revs.findByUser(l.getUserId());
 		for(Review r:revlist)
 		{
