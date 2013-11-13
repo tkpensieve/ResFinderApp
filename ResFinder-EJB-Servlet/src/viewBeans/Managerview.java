@@ -155,7 +155,7 @@ public class Managerview {
 	String resname;
 	List<Cuisine> rescuislist;
 	ArrayList<Review> revlist;
-	int rating;
+	double rating;
 	RequestStatus status;
 	@PostConstruct
 	public void fillman()

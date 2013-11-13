@@ -40,6 +40,15 @@ public class ReviewService {
     {
     	TypedQuery<Review> query= em.createNamedQuery("Review.fetchRev",Review.class);
     	query.setParameter("id", id);
+    
+    	return (ArrayList<Review>) query.getResultList();
+    	
+    }
+    public ArrayList<Review>findByUserRes(String id, int resid)
+    {
+    	TypedQuery<Review> query= em.createNamedQuery("Review.fetchRevRes",Review.class);
+    	query.setParameter("id", id);
+    	query.setParameter("resid", resid);
     	return (ArrayList<Review>) query.getResultList();
     	
     }
@@ -53,6 +62,13 @@ public class ReviewService {
     {
     	ArrayList<Review> results = (ArrayList<Review>) em.createQuery("SELECT c FROM Review c where c.restaurant.id="+id).getResultList();
 		return results;
+    }
+    public ArrayList<Double> getRatings(int id)
+    {
+    	TypedQuery<Double> query=em.createNamedQuery("Review.getRatings",Double.class);
+    	query.setParameter("id",id);
+    	return (ArrayList<Double>)query.getResultList();
+    	
     }
 	public Review findById(int id)
 	{

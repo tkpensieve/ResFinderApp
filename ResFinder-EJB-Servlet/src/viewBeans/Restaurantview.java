@@ -1,5 +1,6 @@
 package viewBeans;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -30,14 +31,22 @@ public class Restaurantview {
 	Restaurant res;
 	String name;
 	String address;
-	int rating;
+	double rating;
 	//@ManagedProperty(value="#{param['business']}")
 	boolean bus;
 	int defid;
 	ArrayList<Review> rev;
 	List<Cuisine> cuis;
 	String newReviewContent;
-	
+	double newrating;
+	public double getNewrating() {
+		return newrating;
+	}
+
+	public void setNewrating(double newrating) {
+		this.newrating = newrating;
+	}
+
 	@PostConstruct
 	public void fillRes()
 	{
@@ -48,6 +57,7 @@ public class Restaurantview {
 			address=res.getAddress();
 			manName=res.getManager().getUser().getName();
 			rev=rs.getReviews(resId);
+			rating=res.getRating();
 		}
 	}
 	
@@ -67,10 +77,10 @@ public class Restaurantview {
 	{
 		return address;
 	}
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 	public String getManName() {
@@ -151,10 +161,20 @@ public class Restaurantview {
 		});
 		return rev;
 	}
-
+	
 	public String addReview(User user){
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		
 		int restId = Integer.parseInt(params.get("resId"));
+		ArrayList<Review> revlist=rs.findByUserRes(user.getId(),restId);
+		if(revlist.size()!=0)
+		{
+			return "restaurantView?faces-redirect=true&search=true&id="+restId;
+		}
+		if(newrating>5)
+		{
+			return "restaurantView?faces-redirect=true&search=true&id="+restId;
+		}
 		Review newReview = new Review();
 		newReview.setContent(newReviewContent);
 		newReview.setDateTimeAdded(new Date());
@@ -162,7 +182,32 @@ public class Restaurantview {
 		Restaurant rest = new Restaurant();
 		rest.setId(restId);
 		newReview.setRestaurant(rest);
+		newReview.setRating(newrating);
         rs.createReview(newReview);    
+        ArrayList<Double> ratingList;
+        ratingList=rs.getRatings(restId);
+        
+        double sum=0;
+        for(Double i :ratingList)
+        {
+        	sum+=i.doubleValue();
+        	System.out.println(i.doubleValue());
+        }
+        if(ratingList.size()!=0)
+        {
+        	sum/=ratingList.size();
+        }
+        System.out.println(sum);
+        DecimalFormat df=new DecimalFormat("#.##");
+		double sum1=Double.parseDouble(df.format(sum));
+        rest=restaurantService.findById(restId);
+        System.out.println(restaurantService.updateRating(sum1, rest));
+        
+        
+        //System.out.println(restaurantService.createRestaurant(rest));
+        rest=restaurantService.findById(restId);
+        System.out.println(rest.getName());
+        System.out.println(rest.getRating());
     	String url = "restaurantView?faces-redirect=true&search=true&id="+restId;
     	return url;
 	}

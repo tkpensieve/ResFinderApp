@@ -20,7 +20,13 @@ import javax.persistence.Table;
 		),
 @NamedQuery(
 		name="Review.fetchRev",
-		query="select rev from Review rev where rev.user.id=:id")
+		query="select rev from Review rev where rev.user.id=:id"),
+@NamedQuery(
+				name="Review.fetchRevRes",
+				query="select rev from Review rev where rev.user.id=:id and rev.restaurant.id=:resid"),
+@NamedQuery(
+		name="Review.getRatings",
+		query="select rev.rating from Review rev inner join rev.restaurant res where rev.restaurant.id=:id")
 })
 @Entity
 @Table(name = "REVIEW")
@@ -44,7 +50,14 @@ public class Review implements Serializable{
 	@Enumerated(EnumType.STRING)
 	ReviewCategory category;
 	Date dateTimeAdded;
+	double rating;
 	
+	public double getRating() {
+		return rating;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
 	public int getId() {
 		return id;
 	}

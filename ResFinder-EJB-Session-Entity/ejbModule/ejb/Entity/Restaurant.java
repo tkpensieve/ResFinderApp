@@ -29,9 +29,8 @@ import javax.persistence.Table;
 		name="Restaurant.fetchByMan",
 		query="select r from Restaurant r where r.manager.user.id=:id"
 	)
-		
-		
 })
+
 @Entity
 @Table(name = "RESTAURANT")
 public class Restaurant implements Serializable {
@@ -57,7 +56,7 @@ public class Restaurant implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "LOCATIONID")
 	Location location;
-	int rating;
+	double rating;
 	@OneToMany(orphanRemoval=true,fetch = FetchType.LAZY)
 	@JoinColumn(name="RESTAURANTID") 
 //	@OneToMany(cascade=CascadeType.ALL)
@@ -99,10 +98,10 @@ public class Restaurant implements Serializable {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 	public List<Review> getReviews() {

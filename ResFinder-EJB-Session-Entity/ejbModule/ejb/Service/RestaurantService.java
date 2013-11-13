@@ -9,7 +9,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+
+import org.jboss.resteasy.core.MediaTypeMap.Typed;
 
 import ejb.Entity.Cuisine;
 import ejb.Entity.Restaurant;
@@ -55,12 +58,20 @@ public class RestaurantService {
 		Restaurant u=em.find(Restaurant.class,id);
 		em.remove(u);
 	}
-	
+	public int updateRating(double rating,Restaurant res)
+	{
+		Query q=em.createQuery("update Restaurant r set r.rating=:rating where r.id=:id");
+		q.setParameter("rating", rating);
+		q.setParameter("id", res.getId());
+		return q.executeUpdate();
+		
+		
+	}
 	public void update(Restaurant u)
 	{
-		em.getTransaction().begin();
+		
 		em.merge(u);
-		em.getTransaction().commit();	
+		
 	}
 	
 	public ArrayList<Restaurant> filter(int locationId, int cuisineId)

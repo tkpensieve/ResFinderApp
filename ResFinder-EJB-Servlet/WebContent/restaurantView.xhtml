@@ -15,7 +15,11 @@
     <br/>
     <h:outputText value="Manager Name:#{Resview.manName}" />
     <br/>
+    <h:outputText value="Rating:#{Resview.rating}" />
+    <br/>
     <h:outputText value="Cuisine: " />
+    <br/>
+    
     <ui:repeat value="#{Resview.cuis}" var="item">
     	<h:outputText value="#{item.name} " />
 	</ui:repeat><br/>
@@ -29,13 +33,16 @@
 		</ui:repeat>
 	</h:panelGroup>
    	<br/>
+   	<h:panelGroup rendered="#{LoginDetails.loggedin}">
    	<span style="font-size:15px">
 	Subject: <h:inputTextarea id="reviewContent" value = "#{Resview.newReviewContent}"/> 
+	Rating:<h:inputTextarea id="rating" value = "#{Resview.newrating}"/>
 	</span> 
 	<br/>
 	<h:commandLink value = "Add" action="#{Resview.addReview(LoginDetails.loggedInUser)}">
 		<f:param name="resId" value="#{param.id}" />
 	</h:commandLink>
+	</h:panelGroup>
 	</h:form>
     </ui:define>
 </ui:composition>
