@@ -152,9 +152,8 @@ public class Restaurantview {
 		return rev;
 	}
 
-	public void addReview(User user){
-		Map<String,String> params = 
-				FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	public String addReview(User user){
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		int restId = Integer.parseInt(params.get("resId"));
 		Review newReview = new Review();
 		newReview.setContent(newReviewContent);
@@ -163,8 +162,8 @@ public class Restaurantview {
 		Restaurant rest = new Restaurant();
 		rest.setId(restId);
 		newReview.setRestaurant(rest);
-        rs.createReview(newReview);
+        rs.createReview(newReview);    
+    	String url = "restaurantView?faces-redirect=true&search=true&id="+restId;
+    	return url;
 	}
-
-	
 }

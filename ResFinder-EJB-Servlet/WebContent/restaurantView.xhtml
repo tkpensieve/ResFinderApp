@@ -33,9 +33,8 @@
 	Subject: <h:inputTextarea id="reviewContent" value = "#{Resview.newReviewContent}"/> 
 	</span> 
 	<br/>
-	<h:commandLink value = "Add">
+	<h:commandLink value = "Add" action="#{Resview.addReview(LoginDetails.loggedInUser)}">
 		<f:param name="resId" value="#{param.id}" />
-		<f:ajax listener="#{Resview.addReview(LoginDetails.loggedInUser)}" execute="reviewContent"/>
 	</h:commandLink>
 	</h:form>
     </ui:define>
