@@ -2,10 +2,8 @@ package viewBeans;
 import java.util.*;
 
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 
@@ -13,6 +11,7 @@ import ejb.Entity.*;
 import ejb.Service.*;
 /*view bean for approval view*/
 @ManagedBean(name="Approval")
+//Backing bean used in add restaurant approved view
 @RequestScoped
 public class Approvalview {
 	
@@ -65,10 +64,12 @@ public class Approvalview {
 		String[] s=e.getCuisine().split(",");
 		ArrayList<Cuisine> clist=new ArrayList<Cuisine>();		
 		ArrayList<Cuisine> cl;
-	
-		for(int i=0;i<s.length;i++)				//loop adds cuisine objects to the list of cuisine objects based on the tokenized string. if the cuisine doesn'texist in the database, a new one is created. 
+		//loop adds cuisine objects to the list of cuisine objects based on the tokenized string.
+		for(int i=0;i<s.length;i++)				 
 		{
-			cl=cs.findCuisine(s[i]);		//find cuisine, returns an arraylist (to check for size)
+			//find cuisine, returns an arraylist (to check for size)
+			cl=cs.findCuisine(s[i]);		
+			//create cuisine if not already present
 			if(cl.size()==0)
 			{
 				Cuisine c=new Cuisine();	//creaate new cuisine because it doesn't exist in the database.
@@ -82,8 +83,9 @@ public class Approvalview {
 		r.setCuisines(clist);
 		
 		String loc=e.getLocation();
-		ArrayList<Location> list=ls.findLoc(loc);		
-		if(list.size()==0)				//adds a new location if the one provided in the request doesn't exist.
+		ArrayList<Location> list=ls.findLoc(loc);
+		//create location if not already present
+		if(list.size()==0)
 		{
 			Location l=new Location();
 			l.setName(loc);
@@ -104,17 +106,7 @@ public class Approvalview {
 		{
 			return;
 		}
-		e.setStatus(RequestStatus.APPROVED);		//set status to approved
-		rs.createAddRestaurantRequest(e);
-		
-		
-		
-		
-		
+		e.setStatus(RequestStatus.APPROVED);//set status to approved
+		rs.createAddRestaurantRequest(e);	
 	}
-	
-	
-	
-	
-
 }

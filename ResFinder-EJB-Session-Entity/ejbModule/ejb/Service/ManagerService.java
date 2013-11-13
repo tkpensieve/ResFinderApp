@@ -2,8 +2,6 @@ package ejb.Service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import ejb.Entity.Manager;
-import ejb.Entity.Restaurant;
 
 /**
  * Session Bean implementation class ManagerService
@@ -28,21 +25,19 @@ public class ManagerService {
     public ManagerService() {
         
     }
+    
     public String createManager(Manager res) {
 		try{
-		em.persist(res);
-		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+			em.persist(res);
+			int beanID = res.getId();
+			return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
 		{
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}	
 	}
 	public Manager findById(String id)
 	{
@@ -54,10 +49,7 @@ public class ManagerService {
 		//return (Manager)em.createQuery("select m from Manager m where m.user.id="+id).getSingleResult();
 		TypedQuery<Manager> query = em.createNamedQuery("Manager.fetchmanager", Manager.class);
         query.setParameter("id", id);
-        
 		return  (Manager) query.getSingleResult();
-		
-		
 	}
 	public void delete(String id)
 	{
@@ -70,5 +62,4 @@ public class ManagerService {
 		em.merge(u);
 		em.getTransaction().commit();	
 	}
-
 }

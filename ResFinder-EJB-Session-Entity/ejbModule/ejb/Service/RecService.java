@@ -16,28 +16,21 @@ import ejb.Entity.Recommendation;
 @Stateless
 @LocalBean
 public class RecService {
-	 @PersistenceContext(unitName="resFinder-ejb-entities")
-		EntityManager em;
-
-    /**
-     * Default constructor. 
-     */
+	@PersistenceContext(unitName="resFinder-ejb-entities")
+	EntityManager em;
    
     public String createRecommendation(Recommendation res) {
 		try{
-		em.persist(res);
-		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+			em.persist(res);
+			int beanID = res.getId();
+			return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
 		{
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}	
 	}
 	public Recommendation findById(int id)
 	{
@@ -51,12 +44,8 @@ public class RecService {
 	}
 	public void update(Recommendation u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
-		em.getTransaction().commit();
-		
-		
+		em.getTransaction().commit();	
 	}
-
 }

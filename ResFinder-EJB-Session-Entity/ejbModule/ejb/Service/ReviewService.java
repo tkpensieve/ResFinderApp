@@ -17,13 +17,9 @@ import ejb.Entity.Review;
 @Stateless
 @LocalBean
 public class ReviewService {
-	 @PersistenceContext(unitName="resFinder-ejb-entities")
-		EntityManager em;
+	@PersistenceContext(unitName="resFinder-ejb-entities")
+	EntityManager em;
 
-    /**
-     * Default constructor. 
-     */
-   
     public String createReview(Review res) {
 		try{
 			em.persist(res);
@@ -40,9 +36,7 @@ public class ReviewService {
     {
     	TypedQuery<Review> query= em.createNamedQuery("Review.fetchRev",Review.class);
     	query.setParameter("id", id);
-    
-    	return (ArrayList<Review>) query.getResultList();
-    	
+    	return (ArrayList<Review>) query.getResultList();	
     }
     public ArrayList<Review>findByUserRes(String id, int resid)
     {
@@ -50,7 +44,6 @@ public class ReviewService {
     	query.setParameter("id", id);
     	query.setParameter("resid", resid);
     	return (ArrayList<Review>) query.getResultList();
-    	
     }
     public Restaurant fetchRes(String id)
     {
@@ -58,7 +51,8 @@ public class ReviewService {
     	query.setParameter("id", id);
     	return (Restaurant) query.getSingleResult();
     }
-    public ArrayList<Review> getReviews(int id)
+    @SuppressWarnings("unchecked")
+	public ArrayList<Review> getReviews(int id)
     {
     	ArrayList<Review> results = (ArrayList<Review>) em.createQuery("SELECT c FROM Review c where c.restaurant.id="+id).getResultList();
 		return results;
@@ -68,7 +62,6 @@ public class ReviewService {
     	TypedQuery<Double> query=em.createNamedQuery("Review.getRatings",Double.class);
     	query.setParameter("id",id);
     	return (ArrayList<Double>)query.getResultList();
-    	
     }
 	public Review findById(int id)
 	{
@@ -86,5 +79,4 @@ public class ReviewService {
 		em.merge(u);
 		em.getTransaction().commit();
 	}
-
 }

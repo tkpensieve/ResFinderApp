@@ -14,9 +14,9 @@ public class UserService {
 
 	public String createUser(User user) {
 		try{
-		em.persist(user);
-		String beanID = user.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+			em.persist(user);
+			String beanID = user.getId();
+			return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
 		{
@@ -25,14 +25,11 @@ public class UserService {
 			return errors.toString();
 		}	
 	}
-	
 	public User findById(String id)
 	{
 		User u=em.find(User.class,id);
 		return u;
 	}
-	
-	
 	public void delete(String id)
 	{
 		User u=em.find(User.class,id);
@@ -43,8 +40,5 @@ public class UserService {
 		em.getTransaction().begin();
 		em.merge(u);
 		em.getTransaction().commit();
-
 	}
-	
-	
 }

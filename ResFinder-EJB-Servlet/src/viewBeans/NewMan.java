@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import ejb.Entity.*;
 import ejb.Service.*;
 /*TODO implementation. extra feature. for now we thought it is a better idea to manually add managers based on requests, as spam managers can create
  * spam restaurants */
@@ -13,14 +12,12 @@ import ejb.Service.*;
 public class NewMan {
 	
 	boolean man;
-	long phno;
-	
+	long phno;	
 	@EJB
 	ManagerService ms;
 	String address;
 	public void hide()
-	{
-		
+	{		
 	}
 	@PostConstruct
 	void setVal()
@@ -45,6 +42,4 @@ public class NewMan {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-
 }

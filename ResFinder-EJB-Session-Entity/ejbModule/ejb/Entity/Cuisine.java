@@ -27,9 +27,7 @@ public class Cuisine implements Serializable {
 	String description;
 	String name;
 	
-	
-	public Cuisine() {
-		
+	public Cuisine() {	
 	}
 	public int getId() {
 		return id;

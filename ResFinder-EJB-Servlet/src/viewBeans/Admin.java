@@ -1,30 +1,23 @@
 package viewBeans;
 /*View bean for administrator view*/
 
-import java.util.*;
-
-
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-
-import ejb.Entity.*;
-import ejb.Service.*;
-
 @ManagedBean(name="Admin")
+//Backing bean used in admin view to approve add restaurant requests
 @RequestScoped
 public class Admin {
-	
 	String userName;
+	String password;
+	String auth;
+	
 	public Admin()
 	{
 		userName="";
 		password="";
 	}
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -37,8 +30,6 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	String password;
-	String auth;
 	public String getAuth() {
 		return auth;
 	}
@@ -52,9 +43,7 @@ public class Admin {
 			return "approve.jsf?faces-redirect=true";
 		}
 		return "a";
-	}
-			
-		
+	}	
 }
 	
 

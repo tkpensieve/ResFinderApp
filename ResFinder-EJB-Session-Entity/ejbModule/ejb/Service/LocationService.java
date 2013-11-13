@@ -8,9 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-import ejb.Entity.Cuisine;
 import ejb.Entity.Location;
-import ejb.Entity.Restaurant;
 
 /**
  * Session Bean implementation class LocationService
@@ -23,9 +21,9 @@ public class LocationService {
 
 	public String createLocation(Location res) {
 		try{
-		em.persist(res);
-		int beanID = res.getId();
-		return "Servlet Session Bean Entity " + "ID =" + beanID;
+			em.persist(res);
+			int beanID = res.getId();
+			return "Servlet Session Bean Entity " + "ID =" + beanID;
 		}
 		catch(Exception e)
 		{
@@ -68,7 +66,6 @@ public class LocationService {
         
 		ArrayList<Location> results =  (ArrayList<Location>) query.getResultList();
 		return results; 
-		
 	}
 
 }

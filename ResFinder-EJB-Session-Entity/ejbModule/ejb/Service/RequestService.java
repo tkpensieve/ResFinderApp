@@ -9,8 +9,6 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import ejb.Entity.AddRestaurantRequest;
-import ejb.Entity.Manager;
-import ejb.Entity.Review;
 
 /**
  * Session Bean implementation class AddRestaurantRequestService
@@ -18,28 +16,20 @@ import ejb.Entity.Review;
 @Stateless
 @LocalBean
 public class RequestService {
-	 @PersistenceContext(unitName="resFinder-ejb-entities")
-		EntityManager em;
+	@PersistenceContext(unitName="resFinder-ejb-entities")
+	EntityManager em;
 
-    /**
-     * Default constructor. 
-     */
-   
     public String createAddRestaurantRequest(AddRestaurantRequest res) {
 		try{
-		em.persist(res);
-		int beanID = res.getId();
-		return "Success";
+			em.persist(res);
+			return "Success";
 		}
 		catch(Exception e)
 		{
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			return errors.toString();
-		}
-		
-		
-			
+		}	
 	}
 	public AddRestaurantRequest findById(int id)
 	{
@@ -53,12 +43,9 @@ public class RequestService {
 	}
 	public void update(AddRestaurantRequest u)
 	{
-		
 		em.getTransaction().begin();
 		em.merge(u);
-		em.getTransaction().commit();
-		
-		
+		em.getTransaction().commit();	
 	}
 	public ArrayList<AddRestaurantRequest> findByName(String name)
 	{
@@ -68,10 +55,10 @@ public class RequestService {
         
 		return  (ArrayList<AddRestaurantRequest>)query.getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public ArrayList<AddRestaurantRequest> getRequests()
     {
     	ArrayList<AddRestaurantRequest> results = (ArrayList<AddRestaurantRequest>) em.createQuery("SELECT a FROM AddRestaurantRequest a where a.status='PENDING'").getResultList();
 		return results;
     }
-
 }

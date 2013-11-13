@@ -1,7 +1,5 @@
 package ejb.Service;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
-import org.jboss.resteasy.core.MediaTypeMap.Typed;
-
-import ejb.Entity.Cuisine;
 import ejb.Entity.Restaurant;
 
 /**
@@ -34,9 +28,9 @@ public class RestaurantService {
     }
     public String createRestaurant(Restaurant res) {
 		try{
-		em.persist(res);
-		String name = res.getName();
-		return "Added restaurant:"+name;
+			em.persist(res);
+			String name = res.getName();
+			return "Added restaurant:"+name;
 		}
 		catch(Exception e)
 		{
@@ -64,14 +58,10 @@ public class RestaurantService {
 		q.setParameter("rating", rating);
 		q.setParameter("id", res.getId());
 		return q.executeUpdate();
-		
-		
 	}
 	public void update(Restaurant u)
 	{
-		
 		em.merge(u);
-		
 	}
 	
 	public ArrayList<Restaurant> filter(int locationId, int cuisineId)
@@ -87,19 +77,13 @@ public class RestaurantService {
 	{
 		TypedQuery<Restaurant> query = em.createNamedQuery("Restaurant.fetchRes", Restaurant.class);
         query.setParameter("name", name);
-        
 		ArrayList<Restaurant> results =  (ArrayList<Restaurant>) query.getResultList();
 		return results; 
-		
 	}
 	public List<Restaurant> fetchByMan(String id)
 	{
 		TypedQuery<Restaurant> query=em.createNamedQuery("Restaurant.fetchByMan",Restaurant.class);
 		query.setParameter("id", id);
 		return (List<Restaurant>) query.getResultList();
-		 
-	
-		
 	}
-
 }

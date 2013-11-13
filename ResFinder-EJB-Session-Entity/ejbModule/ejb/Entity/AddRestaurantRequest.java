@@ -36,10 +36,7 @@ public class AddRestaurantRequest implements Serializable {
 	String restaurantName;
 	String address;
 	String cuisine;
-	
 	String location;
-
-	
 	
 	public String getLocation() {
 		return location;

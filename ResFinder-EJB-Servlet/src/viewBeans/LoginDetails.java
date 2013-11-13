@@ -8,6 +8,7 @@ import ejb.Service.ManagerService;
 import ejb.Service.UserService;
 /*session bean for log in*/
 @ManagedBean(name="LoginDetails")
+//Bean used to store the logged in user details and has lifetime of the user's session
 @SessionScoped
 public class LoginDetails {
 	@EJB
@@ -79,19 +80,22 @@ public class LoginDetails {
 	}
 	public void login()	{
 		User user = null;
+		String profilePageLink = null;
+		//Handle business user login
 		if(businessUser){
 			Manager manager = managerService.findByUserid(userId);
 			user = manager.getUser();
-			this.setProfileLink("managerView");
+			profilePageLink = "managerView";
 		}
 		else {
 			user = userService.findById(userId);
-			this.setProfileLink("userHome");
+			profilePageLink = "userHome";
 		}
 		String message = "";
 		if(user.getPassword().toLowerCase().equals(password.toLowerCase())){
 			message =  "";
 			this.setLoggedInUser(user);
+			this.setProfileLink(profilePageLink);
 			loggedin=true;
 		}
 		else{
@@ -99,7 +103,9 @@ public class LoginDetails {
 		}
 		this.setLoginMessage(message);
 	}
+	
 	public String logout(){
+		//clear all user related session information on logout
 		this.setLoggedInUser(null);
 		this.setLoginMessage(null);
 		userId=null;
