@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+  
+  <bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource">
+    <property name="URL" value="jdbc:h2:tcp://localhost/~/ResFinder"/>
+    <property name="user" value="restaurant"/>
+    <property name="password" value="1234"/>
+  </bean>
+	  
+  <service interface="javax.sql.DataSource" ref="dataSource">
+    <service-properties>
+      <entry key="osgi.jndi.service.name" value="jdbc/h2ds"/>
+    </service-properties>
+  </service>
+  
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <route>
+      <from uri="timer://customerDataTrigger?delay=86400000&amp;period=2000"/>
+      <!-- Load all Users -->
+      <setBody>
+		<constant>select * from USER</constant>
+      </setBody>
+      <to uri="jdbc:dataSource"/>
+      <split>
+		<simple>${body}</simple>
+		<log message="For UserId.. ${body[ID]}"/>
+		<setBody>
+			<!-- Find similar users -->
+			<simple> select ID1, ID2 from 
+					 (select U1.Id as ID1, U2.Id as ID2 from User as U1 join User as U2 on U1.Rank = U2.rank and U1.Id > U2.Id)
+					 where ID1 ='${body[ID]}' 
+			</simple>
+		</setBody>
+		<to uri="jdbc:dataSource"/>
+		<split>
+			<simple>${body}</simple>
+			<log message="For UserId.. ${body[ID1]} ..... Similar user.. ${body[ID2]}"/>
+			<setBody>
+				<!-- Find restaurants to be followed -->
+				<simple> select '${body[ID1]}' as USERID, RESTAURANTID from Review where userid = '${body[ID2]}'
+						 except
+						 select '${body[ID1]}' as USERID, RESTAURANTID from Review where userid = '${body[ID1]}' 
+				</simple>
+			</setBody>
+			<to uri="jdbc:dataSource"/>
+			<split>
+				<simple>${body}</simple>
+				<to uri="activemq:queue:resFinder:recommendations" />
+			</split>
+		</split>
+      </split>
+  
+    </route>
+  </camelContext>
+</blueprint>
