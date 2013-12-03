@@ -15,7 +15,7 @@
   
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
     <route>
-      <from uri="timer://customerDataTrigger?delay=86400000&amp;period=2000"/>
+      <from uri="quartz://recommendationJob?cron=0+15+22+*+*+?"/>
       <!-- Load all Users -->
       <setBody>
 		<constant>select * from USER</constant>
@@ -49,7 +49,23 @@
 			</split>
 		</split>
       </split>
-  
+      <!-- Load new users without any reviews -->
+	  <setBody>
+		<constant>SELECT U.Id FROM User as U left join Review as R on U.Id = R.USERID where R.Id is null</constant>
+      </setBody>
+      <to uri="jdbc:dataSource"/>
+	  <split>
+		<simple>${body}</simple>
+		<setBody>
+				<!-- Find top 3 ranked restaurants to be followed -->
+				<simple> select top 3 Id as RESTAURANTID, '${body[ID]}' as USERID from Restaurant order by  Rating desc </simple>
+			</setBody>
+			<to uri="jdbc:dataSource"/>
+			<split>
+				<simple>${body}</simple>
+				<to uri="activemq:queue:resFinder:recommendations" />
+			</split>
+      </split>
     </route>
   </camelContext>
 </blueprint>
