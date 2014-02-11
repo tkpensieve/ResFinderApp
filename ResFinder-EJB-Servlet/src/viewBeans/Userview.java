@@ -21,9 +21,14 @@ public class Userview {
 	
 	@EJB
 	ReviewService revs;
+	
+	@EJB
+	RecommendationService recs;
+	
 	@ManagedProperty(value="#{LoginDetails}")
 	LoginDetails l;
 	List<Review> revlist;
+	List<Recommendation> reclist;
 	
 	public LoginDetails getL() {
 		return l;
@@ -42,5 +47,13 @@ public class Userview {
 	}
 	public void setRevlist(List<Review> revlist) {
 		this.revlist = revlist;
+	}
+	public List<Recommendation> getReclist() {
+		//get users reviews and restaurant details for that review
+		reclist=recs.findByUser(l.getUserId());
+		return reclist;
+	}
+	public void setReclist(List<Recommendation> reclist) {
+		this.reclist = reclist;
 	}
 }

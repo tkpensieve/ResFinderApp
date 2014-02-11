@@ -7,16 +7,24 @@
     <ui:define name="content">
 	<h3>Your Added Reviews</h3> 
     <ui:repeat value="#{Userview.revlist}" var="item">
-    <br/>
-    <h3>
-    	<h:link outcome="restaurantView" value="#{item.restaurant.name}">
-	    	<f:param name="id" value="#{item.restaurant.id}"/>
-    		<f:param name="search" value="#{true}"/>
-    	</h:link>
-    </h3>
-    <span style="font-size:15px"><b>User #{item.user.id}</b> wrote on #{item.dateTimeAdded}</span><hr/><p style="font-family:Verdana; font-size:15px">#{item.content}</p><hr/>
+	    <br/>
+	    <h3>
+	    	<h:link outcome="restaurantView" value="#{item.restaurant.name}">
+		    	<f:param name="id" value="#{item.restaurant.id}"/>
+	    		<f:param name="search" value="#{true}"/>
+	    	</h:link>
+	    </h3>
+	    <span style="font-size:15px"><b>User #{item.user.id}</b> wrote on #{item.dateTimeAdded}</span><hr/><p style="font-family:Verdana; font-size:15px">#{item.content}</p><hr/>
 	</ui:repeat>  
-
+	<h3>Restaurants recommended for You</h3> 
+    <ui:repeat value="#{Userview.reclist}" var="item">
+	    <h3>
+	    	<h:link outcome="restaurantView" value="#{item.restaurant.name}">
+		    	<f:param name="id" value="#{item.restaurant.id}"/>
+	    		<f:param name="search" value="#{true}"/>
+	    	</h:link>
+	    </h3>
+	</ui:repeat>
     </ui:define>
     </ui:composition>
     </html>

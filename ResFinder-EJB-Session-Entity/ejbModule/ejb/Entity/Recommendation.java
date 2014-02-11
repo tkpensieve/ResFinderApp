@@ -8,7 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+@NamedQueries({
+	@NamedQuery(
+		name="Recommendation.fetchRes",			//query to fetch restaurant based on user id of user who wrote the review and restaurant id
+		query="select res from Recommendation rec inner join rec.restaurant res where rec.user.id=:id"
+		),
+		@NamedQuery(
+				name="Recommendation.fetchRec",			//fetch recommendation based on user id
+				query="select rec from Recommendation rec where rec.user.id=:id")
+})
 
 @Entity
 @Table(name = "RECOMMENDATION")
